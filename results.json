@@ -19,7 +19,7 @@
           "statusText": "OK",
           "headers": {
             "server": "nginx/1.18.0 (Ubuntu)",
-            "date": "Wed, 18 Feb 2026 05:17:5******** GMT",
+            "date": "Wed, 18 Feb 2026 15:********6:19 GMT",
             "content-type": "application/json",
             "content-length": "59",
             "connection": "close",
@@ -29,7 +29,7 @@
             "x-forwarded-proto": "https",
             "accept": "application/json, text/plain, */*",
             "user-agent": "bruno-runtime/********.1.1",
-            "request-start-time": "1771********9187********459",
+            "request-start-time": "1771428979502",
             "accept-encoding": "gzip, compress, deflate, br",
             "strict-transport-security": "max-age=6********072000; includeSubdomains",
             "x-frame-options": "DENY",
@@ -40,13 +40,13 @@
             "website": "hildegard.org"
           },
           "url": "https://echo.usebruno.com/",
-          "responseTime": 186
+          "responseTime": 155
         },
         "error": null,
         "status": "pass",
         "assertionResults": [
           {
-            "uid": "ZUi9-WQGhWwCXt6VmT9bV",
+            "uid": "y-ez2D8MMqO1fyN1IYxV6",
             "lhsExpr": "res.status",
             "rhsExpr": "eq 200",
             "rhsOperand": "200",
@@ -54,7 +54,7 @@
             "status": "pass"
           },
           {
-            "uid": "y_hBCXFzX5ge6EWsiii7D",
+            "uid": "uTKLJM57a_********gogpjnax18",
             "lhsExpr": "res.body.name",
             "rhsExpr": "isString",
             "rhsOperand": "",
@@ -62,7 +62,7 @@
             "status": "pass"
           },
           {
-            "uid": "sap5XSzGpcP56oLHXA8qH",
+            "uid": "Lj6d9kYPty1WmEvpjHL0D",
             "lhsExpr": "res.body.website",
             "rhsExpr": "isString",
             "rhsOperand": "",
@@ -74,7 +74,7 @@
         "preRequestTestResults": [],
         "postResponseTestResults": [],
         "shouldStopRunnerExecution": false,
-        "runDuration": 0.275064,
+        "runDuration": 0.233794583,
         "name": "Create User",
         "path": "06-Collection Runner/Solution/Create User.yml",
         "iterationIndex": 0
@@ -94,7 +94,7 @@
           "status": 200,
           "statusText": "OK",
           "headers": {
-            "date": "Wed, 18 Feb 2026 05:17:5******** GMT",
+            "date": "Wed, 18 Feb 2026 15:********6:19 GMT",
             "content-type": "application/json; charset=utf-8",
             "transfer-encoding": "chunked",
             "connection": "close",
@@ -114,9 +114,9 @@
             "x-ratelimit-limit": "1000",
             "x-ratelimit-remaining": "802",
             "x-ratelimit-reset": "1771********89711",
-            "age": "2167",
+            "age": "10298",
             "cf-cache-status": "HIT",
-            "cf-ray": "9cfb0f8afc2********bd2b-ATL",
+            "cf-ray": "9cfe997********69e2dce5-ATL",
             "alt-svc": "h********=\":44********\"; ma=86400"
           },
           "data": {
@@ -143,13 +143,13 @@
             }
           },
           "url": "https://jsonplaceholder.typicode.com/users/1",
-          "responseTime": 69
+          "responseTime": 58
         },
         "error": null,
         "status": "pass",
         "assertionResults": [
           {
-            "uid": "9LL-m0FWPKRjxo7ng********y5Z",
+            "uid": "uZ5xjw5U5HOb0ki2k0SrF",
             "lhsExpr": "res.status",
             "rhsExpr": "eq 200",
             "rhsOperand": "200",
@@ -157,7 +157,7 @@
             "status": "pass"
           },
           {
-            "uid": "PtLowLc6Oc2-acsvI2zw6",
+            "uid": "rszdXc47XgFoOcMtGji2H",
             "lhsExpr": "res.body",
             "rhsExpr": "isJson",
             "rhsOperand": "",
@@ -165,7 +165,7 @@
             "status": "pass"
           },
           {
-            "uid": "9sjZCsrvrs4HSYtogXXQl",
+            "uid": "i8HvJyAwgGojdcn2fLL_u",
             "lhsExpr": "res.body.id",
             "rhsExpr": "isNumber",
             "rhsOperand": "",
@@ -177,29 +177,57 @@
           {
             "description": "User exists and has valid data",
             "status": "pass",
-            "uid": "t0yEld0JJ29WMCz26Pc5M"
+            "uid": "0K_QkTrMXtAtqUc-Gll6G"
           },
           {
             "description": "Response time is acceptable",
             "status": "pass",
-            "uid": "XWOdPvsunu1z********gfoC1HRp"
+            "uid": "7MlkvryA0fy********ZaQ2E__gv"
           }
         ],
         "preRequestTestResults": [],
         "postResponseTestResults": [],
         "shouldStopRunnerExecution": false,
-        "runDuration": 0.158751917,
+        "runDuration": 0.1448075,
         "name": "Verify Creation",
         "path": "06-Collection Runner/Solution/Verify Creation.yml",
         "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": ".github/workflows/collection-runner-tests.yml"
+        },
+        "request": {
+          "method": null,
+          "url": null,
+          "headers": null,
+          "data": null
+        },
+        "response": {
+          "status": "skipped",
+          "statusText": "Invalid item: missing type",
+          "data": null,
+          "responseTime": 0
+        },
+        "error": "Invalid item: missing type",
+        "status": "skipped",
+        "skipped": true,
+        "assertionResults": [],
+        "testResults": [],
+        "preRequestTestResults": [],
+        "postResponseTestResults": [],
+        "runDuration": 0,
+        "suitename": ".github/workflows/collection-runner-tests",
+        "name": "collection-runner-tests.yml",
+        "path": ".github/workflows/collection-runner-tests.yml"
       }
     ],
     "summary": {
-      "totalRequests": 2,
+      "totalRequests": 3,
       "passedRequests": 2,
       "failedRequests": 0,
       "errorRequests": 0,
-      "skippedRequests": 0,
+      "skippedRequests": 1,
       "totalAssertions": 6,
       "passedAssertions": 6,
       "failedAssertions": 0,
@@ -234,7 +262,7 @@
           "statusText": "OK",
           "headers": {
             "server": "nginx/1.18.0 (Ubuntu)",
-            "date": "Wed, 18 Feb 2026 05:17:5******** GMT",
+            "date": "Wed, 18 Feb 2026 15:********6:20 GMT",
             "content-type": "application/json",
             "content-length": "58",
             "connection": "close",
@@ -244,7 +272,7 @@
             "x-forwarded-proto": "https",
             "accept": "application/json, text/plain, */*",
             "user-agent": "bruno-runtime/********.1.1",
-            "request-start-time": "1771********9187********847",
+            "request-start-time": "1771428979845",
             "accept-encoding": "gzip, compress, deflate, br",
             "strict-transport-security": "max-age=6********072000; includeSubdomains",
             "x-frame-options": "DENY",
@@ -255,13 +283,13 @@
             "website": "anastasia.net"
           },
           "url": "https://echo.usebruno.com/",
-          "responseTime": 264
+          "responseTime": 240
         },
         "error": null,
         "status": "pass",
         "assertionResults": [
           {
-            "uid": "tvl0gTW8hOoUrN4XpDCbi",
+            "uid": "sfohNswiYl9J_s********Qe********0Xv",
             "lhsExpr": "res.status",
             "rhsExpr": "eq 200",
             "rhsOperand": "200",
@@ -269,7 +297,7 @@
             "status": "pass"
           },
           {
-            "uid": "HEGxu0erQR1ByKFELB********Wv",
+            "uid": "NxU9S7UZOpvx4WqXxX8wA",
             "lhsExpr": "res.body.name",
             "rhsExpr": "isString",
             "rhsOperand": "",
@@ -277,7 +305,7 @@
             "status": "pass"
           },
           {
-            "uid": "mVAL1LAuziisEH1i********2IZX",
+            "uid": "15vLlN6kW5HA********XUb1r9bW",
             "lhsExpr": "res.body.website",
             "rhsExpr": "isString",
             "rhsOperand": "",
@@ -289,7 +317,7 @@
         "preRequestTestResults": [],
         "postResponseTestResults": [],
         "shouldStopRunnerExecution": false,
-        "runDuration": 0.298941292,
+        "runDuration": 0.277252,
         "name": "Create User",
         "path": "06-Collection Runner/Solution/Create User.yml",
         "iterationIndex": 1
@@ -309,7 +337,7 @@
           "status": 200,
           "statusText": "OK",
           "headers": {
-            "date": "Wed, 18 Feb 2026 05:17:54 GMT",
+            "date": "Wed, 18 Feb 2026 15:********6:20 GMT",
             "content-type": "application/json; charset=utf-8",
             "transfer-encoding": "chunked",
             "connection": "close",
@@ -329,9 +357,9 @@
             "x-ratelimit-limit": "1000",
             "x-ratelimit-remaining": "999",
             "x-ratelimit-reset": "1771********80291",
-            "age": "11600",
+            "age": "176********7",
             "cf-cache-status": "HIT",
-            "cf-ray": "9cfb0f8dcf8********7252-ATL",
+            "cf-ray": "9cfe99761c0********0878-ATL",
             "alt-svc": "h********=\":44********\"; ma=86400"
           },
           "data": {
@@ -358,13 +386,13 @@
             }
           },
           "url": "https://jsonplaceholder.typicode.com/users/2",
-          "responseTime": 52
+          "responseTime": 47
         },
         "error": null,
         "status": "pass",
         "assertionResults": [
           {
-            "uid": "_QYc-M********Yjhud********ffAJMg1Y",
+            "uid": "DIRbHA7Gxg8waTGBy5y4********",
             "lhsExpr": "res.status",
             "rhsExpr": "eq 200",
             "rhsOperand": "200",
@@ -372,7 +400,7 @@
             "status": "pass"
           },
           {
-            "uid": "cwTpFqXa********64VQB9FbS9ni",
+            "uid": "jmL_XOOaMw_lt5oEsUJa********",
             "lhsExpr": "res.body",
             "rhsExpr": "isJson",
             "rhsOperand": "",
@@ -380,7 +408,7 @@
             "status": "pass"
           },
           {
-            "uid": "gHrm-tAhzGmTvB-oBmQfs",
+            "uid": "6PAvaE0ah6Tlblkvce1********z",
             "lhsExpr": "res.body.id",
             "rhsExpr": "isNumber",
             "rhsOperand": "",
@@ -392,29 +420,57 @@
           {
             "description": "User exists and has valid data",
             "status": "pass",
-            "uid": "Q9YAADbbjbsEI********SEBzYuF"
+            "uid": "i8tE4SFlp********ZTWB6GS_IRa"
           },
           {
             "description": "Response time is acceptable",
             "status": "pass",
-            "uid": "XKM8A-elEKzdegAJZC6dz"
+            "uid": "EAQKUbKZAjCTZIql6A6Rh"
           }
         ],
         "preRequestTestResults": [],
         "postResponseTestResults": [],
         "shouldStopRunnerExecution": false,
-        "runDuration": 0.152650083,
+        "runDuration": 0.137573917,
         "name": "Verify Creation",
         "path": "06-Collection Runner/Solution/Verify Creation.yml",
         "iterationIndex": 1
+      },
+      {
+        "test": {
+          "filename": ".github/workflows/collection-runner-tests.yml"
+        },
+        "request": {
+          "method": null,
+          "url": null,
+          "headers": null,
+          "data": null
+        },
+        "response": {
+          "status": "skipped",
+          "statusText": "Invalid item: missing type",
+          "data": null,
+          "responseTime": 0
+        },
+        "error": "Invalid item: missing type",
+        "status": "skipped",
+        "skipped": true,
+        "assertionResults": [],
+        "testResults": [],
+        "preRequestTestResults": [],
+        "postResponseTestResults": [],
+        "runDuration": 0,
+        "suitename": ".github/workflows/collection-runner-tests",
+        "name": "collection-runner-tests.yml",
+        "path": ".github/workflows/collection-runner-tests.yml"
       }
     ],
     "summary": {
-      "totalRequests": 2,
+      "totalRequests": 3,
       "passedRequests": 2,
       "failedRequests": 0,
       "errorRequests": 0,
-      "skippedRequests": 0,
+      "skippedRequests": 1,
       "totalAssertions": 6,
       "passedAssertions": 6,
       "failedAssertions": 0,
@@ -449,7 +505,7 @@
           "statusText": "OK",
           "headers": {
             "server": "nginx/1.18.0 (Ubuntu)",
-            "date": "Wed, 18 Feb 2026 05:17:54 GMT",
+            "date": "Wed, 18 Feb 2026 15:********6:20 GMT",
             "content-type": "application/json",
             "content-length": "60",
             "connection": "close",
@@ -459,7 +515,7 @@
             "x-forwarded-proto": "https",
             "accept": "application/json, text/plain, */*",
             "user-agent": "bruno-runtime/********.1.1",
-            "request-start-time": "1771********91874********11",
+            "request-start-time": "1771428980271",
             "accept-encoding": "gzip, compress, deflate, br",
             "strict-transport-security": "max-age=6********072000; includeSubdomains",
             "x-frame-options": "DENY",
@@ -470,13 +526,13 @@
             "website": "ramiro.info"
           },
           "url": "https://echo.usebruno.com/",
-          "responseTime": 103
+          "responseTime": 95
         },
         "error": null,
         "status": "pass",
         "assertionResults": [
           {
-            "uid": "c6uQbW9ULnwIlo62iUbEx",
+            "uid": "6JETabFcHiPZqToPCySu8",
             "lhsExpr": "res.status",
             "rhsExpr": "eq 200",
             "rhsOperand": "200",
@@ -484,7 +540,7 @@
             "status": "pass"
           },
           {
-            "uid": "LkzEab8E44f_l-cmP_CT4",
+            "uid": "4Fqyj7ynN5Yy4RymmxEBE",
             "lhsExpr": "res.body.name",
             "rhsExpr": "isString",
             "rhsOperand": "",
@@ -492,7 +548,7 @@
             "status": "pass"
           },
           {
-            "uid": "gLYg********aElu1HNa********EYEG0ZZ",
+            "uid": "7SKKqpNWiDMJWbenil8Xz",
             "lhsExpr": "res.body.website",
             "rhsExpr": "isString",
             "rhsOperand": "",
@@ -504,7 +560,7 @@
         "preRequestTestResults": [],
         "postResponseTestResults": [],
         "shouldStopRunnerExecution": false,
-        "runDuration": 0.14702575,
+        "runDuration": 0.138611708,
         "name": "Create User",
         "path": "06-Collection Runner/Solution/Create User.yml",
         "iterationIndex": 2
@@ -524,7 +580,7 @@
           "status": 200,
           "statusText": "OK",
           "headers": {
-            "date": "Wed, 18 Feb 2026 05:17:54 GMT",
+            "date": "Wed, 18 Feb 2026 15:********6:20 GMT",
             "content-type": "application/json; charset=utf-8",
             "transfer-encoding": "chunked",
             "connection": "close",
@@ -544,9 +600,9 @@
             "x-ratelimit-limit": "1000",
             "x-ratelimit-remaining": "999",
             "x-ratelimit-reset": "1770987092",
-            "age": "15005",
+            "age": "1998",
             "cf-cache-status": "HIT",
-            "cf-ray": "9cfb0f907e7f********29a-ATL",
+            "cf-ray": "9cfe9978a9d520d********-ATL",
             "alt-svc": "h********=\":44********\"; ma=86400"
           },
           "data": {
@@ -573,13 +629,13 @@
             }
           },
           "url": "https://jsonplaceholder.typicode.com/users/********",
-          "responseTime": 186
+          "responseTime": 187
         },
         "error": null,
         "status": "pass",
         "assertionResults": [
           {
-            "uid": "mZfgd0n01LPJRkeMAXX2t",
+            "uid": "kbLATCrjjU4DQczXBl6AU",
             "lhsExpr": "res.status",
             "rhsExpr": "eq 200",
             "rhsOperand": "200",
@@ -587,7 +643,7 @@
             "status": "pass"
           },
           {
-            "uid": "Sgq_nPkYSsJ0dePu0xJej",
+            "uid": "lVpAEcIrBDSURc1QTNXG********",
             "lhsExpr": "res.body",
             "rhsExpr": "isJson",
             "rhsOperand": "",
@@ -595,7 +651,7 @@
             "status": "pass"
           },
           {
-            "uid": "bhwZvkjBvVahk-jFbUaC4",
+            "uid": "Yj2jy-zOgE2AAdWBBNElk",
             "lhsExpr": "res.body.id",
             "rhsExpr": "isNumber",
             "rhsOperand": "",
@@ -607,29 +663,57 @@
           {
             "description": "User exists and has valid data",
             "status": "pass",
-            "uid": "MprQXrSuo9t6XKJ2rJmZJ"
+            "uid": "R_kaTq8c6DnlagkfkwSe7"
           },
           {
             "description": "Response time is acceptable",
             "status": "pass",
-            "uid": "w4vfGAt7QXaqcNWXfdPmW"
+            "uid": "NcKr1ejlsGYEl_rt9GuoF"
           }
         ],
         "preRequestTestResults": [],
         "postResponseTestResults": [],
         "shouldStopRunnerExecution": false,
-        "runDuration": 0.29741775,
+        "runDuration": 0.298048916,
         "name": "Verify Creation",
         "path": "06-Collection Runner/Solution/Verify Creation.yml",
         "iterationIndex": 2
+      },
+      {
+        "test": {
+          "filename": ".github/workflows/collection-runner-tests.yml"
+        },
+        "request": {
+          "method": null,
+          "url": null,
+          "headers": null,
+          "data": null
+        },
+        "response": {
+          "status": "skipped",
+          "statusText": "Invalid item: missing type",
+          "data": null,
+          "responseTime": 0
+        },
+        "error": "Invalid item: missing type",
+        "status": "skipped",
+        "skipped": true,
+        "assertionResults": [],
+        "testResults": [],
+        "preRequestTestResults": [],
+        "postResponseTestResults": [],
+        "runDuration": 0,
+        "suitename": ".github/workflows/collection-runner-tests",
+        "name": "collection-runner-tests.yml",
+        "path": ".github/workflows/collection-runner-tests.yml"
       }
     ],
     "summary": {
-      "totalRequests": 2,
+      "totalRequests": 3,
       "passedRequests": 2,
       "failedRequests": 0,
       "errorRequests": 0,
-      "skippedRequests": 0,
+      "skippedRequests": 1,
       "totalAssertions": 6,
       "passedAssertions": 6,
       "failedAssertions": 0,
@@ -664,7 +748,7 @@
           "statusText": "OK",
           "headers": {
             "server": "nginx/1.18.0 (Ubuntu)",
-            "date": "Wed, 18 Feb 2026 05:17:54 GMT",
+            "date": "Wed, 18 Feb 2026 15:********6:20 GMT",
             "content-type": "application/json",
             "content-length": "57",
             "connection": "close",
@@ -674,7 +758,7 @@
             "x-forwarded-proto": "https",
             "accept": "application/json, text/plain, */*",
             "user-agent": "bruno-runtime/********.1.1",
-            "request-start-time": "1771********91874756",
+            "request-start-time": "1771428980709",
             "accept-encoding": "gzip, compress, deflate, br",
             "strict-transport-security": "max-age=6********072000; includeSubdomains",
             "x-frame-options": "DENY",
@@ -685,13 +769,13 @@
             "website": "kale.biz"
           },
           "url": "https://echo.usebruno.com/",
-          "responseTime": 97
+          "responseTime": 103
         },
         "error": null,
         "status": "pass",
         "assertionResults": [
           {
-            "uid": "TYaVxGLxH********-29PK8j4IdU",
+            "uid": "HOvMKF********8OWqCEntEMIiYu",
             "lhsExpr": "res.status",
             "rhsExpr": "eq 200",
             "rhsOperand": "200",
@@ -699,7 +783,7 @@
             "status": "pass"
           },
           {
-            "uid": "SoOVnZa5zGRl_Z9_PkiJ6",
+            "uid": "ByUgqbO1Kpu20u-U_rFZz",
             "lhsExpr": "res.body.name",
             "rhsExpr": "isString",
             "rhsOperand": "",
@@ -707,7 +791,7 @@
             "status": "pass"
           },
           {
-            "uid": "BDQ-jVxRCxHvwrnhdwNg8",
+            "uid": "KBnvcHQsEFeA6Zk0JhbzT",
             "lhsExpr": "res.body.website",
             "rhsExpr": "isString",
             "rhsOperand": "",
@@ -719,7 +803,7 @@
         "preRequestTestResults": [],
         "postResponseTestResults": [],
         "shouldStopRunnerExecution": false,
-        "runDuration": 0.140533083,
+        "runDuration": 0.147502875,
         "name": "Create User",
         "path": "06-Collection Runner/Solution/Create User.yml",
         "iterationIndex": 3
@@ -739,7 +823,7 @@
           "status": 200,
           "statusText": "OK",
           "headers": {
-            "date": "Wed, 18 Feb 2026 05:17:54 GMT",
+            "date": "Wed, 18 Feb 2026 15:********6:20 GMT",
             "content-type": "application/json; charset=utf-8",
             "transfer-encoding": "chunked",
             "connection": "close",
@@ -759,9 +843,9 @@
             "x-ratelimit-limit": "1000",
             "x-ratelimit-remaining": "999",
             "x-ratelimit-reset": "1771********87971",
-            "age": "********951",
+            "age": "1998",
             "cf-cache-status": "HIT",
-            "cf-ray": "9cfb0f9258e8********8be-ATL",
+            "cf-ray": "9cfe997a9b4c78ee-ATL",
             "alt-svc": "h********=\":44********\"; ma=86400"
           },
           "data": {
@@ -788,13 +872,13 @@
             }
           },
           "url": "https://jsonplaceholder.typicode.com/users/4",
-          "responseTime": 40
+          "responseTime": 57
         },
         "error": null,
         "status": "pass",
         "assertionResults": [
           {
-            "uid": "wtPmH2LI7R-WBzbKpxnEM",
+            "uid": "HCLcl9aY1QpP4Vhvf2a6v",
             "lhsExpr": "res.status",
             "rhsExpr": "eq 200",
             "rhsOperand": "200",
@@ -802,7 +886,7 @@
             "status": "pass"
           },
           {
-            "uid": "P_bF5XbZfsRVAjybJZrrA",
+            "uid": "HkrKmd2tGjyLrEtGAWRmL",
             "lhsExpr": "res.body",
             "rhsExpr": "isJson",
             "rhsOperand": "",
@@ -810,7 +894,7 @@
             "status": "pass"
           },
           {
-            "uid": "ITIVj********sd6TIIxmN7voW********G",
+            "uid": "uSmQySf4ahM7B1wDj4nqJ",
             "lhsExpr": "res.body.id",
             "rhsExpr": "isNumber",
             "rhsOperand": "",
@@ -822,29 +906,57 @@
           {
             "description": "User exists and has valid data",
             "status": "pass",
-            "uid": "mXIXRT5OJR41usAoke-QI"
+            "uid": "oATcdBddsqrpRlRaRSH9********"
           },
           {
             "description": "Response time is acceptable",
             "status": "pass",
-            "uid": "zxxLX096BUvz4z6C9tzPt"
+            "uid": "SOT4mdjFWHh2ze81HDDQU"
           }
         ],
         "preRequestTestResults": [],
         "postResponseTestResults": [],
         "shouldStopRunnerExecution": false,
-        "runDuration": 0.134115,
+        "runDuration": 0.157784,
         "name": "Verify Creation",
         "path": "06-Collection Runner/Solution/Verify Creation.yml",
         "iterationIndex": 3
+      },
+      {
+        "test": {
+          "filename": ".github/workflows/collection-runner-tests.yml"
+        },
+        "request": {
+          "method": null,
+          "url": null,
+          "headers": null,
+          "data": null
+        },
+        "response": {
+          "status": "skipped",
+          "statusText": "Invalid item: missing type",
+          "data": null,
+          "responseTime": 0
+        },
+        "error": "Invalid item: missing type",
+        "status": "skipped",
+        "skipped": true,
+        "assertionResults": [],
+        "testResults": [],
+        "preRequestTestResults": [],
+        "postResponseTestResults": [],
+        "runDuration": 0,
+        "suitename": ".github/workflows/collection-runner-tests",
+        "name": "collection-runner-tests.yml",
+        "path": ".github/workflows/collection-runner-tests.yml"
       }
     ],
     "summary": {
-      "totalRequests": 2,
+      "totalRequests": 3,
       "passedRequests": 2,
       "failedRequests": 0,
       "errorRequests": 0,
-      "skippedRequests": 0,
+      "skippedRequests": 1,
       "totalAssertions": 6,
       "passedAssertions": 6,
       "failedAssertions": 0,
@@ -879,7 +991,7 @@
           "statusText": "OK",
           "headers": {
             "server": "nginx/1.18.0 (Ubuntu)",
-            "date": "Wed, 18 Feb 2026 05:17:55 GMT",
+            "date": "Wed, 18 Feb 2026 15:********6:21 GMT",
             "content-type": "application/json",
             "content-length": "61",
             "connection": "close",
@@ -889,7 +1001,7 @@
             "x-forwarded-proto": "https",
             "accept": "application/json, text/plain, */*",
             "user-agent": "bruno-runtime/********.1.1",
-            "request-start-time": "1771********91875029",
+            "request-start-time": "1771428981012",
             "accept-encoding": "gzip, compress, deflate, br",
             "strict-transport-security": "max-age=6********072000; includeSubdomains",
             "x-frame-options": "DENY",
@@ -900,13 +1012,13 @@
             "website": "demarco.info"
           },
           "url": "https://echo.usebruno.com/",
-          "responseTime": 218
+          "responseTime": 187
         },
         "error": null,
         "status": "pass",
         "assertionResults": [
           {
-            "uid": "VNERJv_9M17TqmS7qzTn6",
+            "uid": "rzlA9uNVXmPzdeyxw********aWp",
             "lhsExpr": "res.status",
             "rhsExpr": "eq 200",
             "rhsOperand": "200",
@@ -914,7 +1026,7 @@
             "status": "pass"
           },
           {
-            "uid": "fZzRTKeq4tqOM9AoeGRAS",
+            "uid": "D7iKsiwHWh_xf9bHmZwIp",
             "lhsExpr": "res.body.name",
             "rhsExpr": "isString",
             "rhsOperand": "",
@@ -922,7 +1034,7 @@
             "status": "pass"
           },
           {
-            "uid": "MMz2HS0IH0JighrWLLUy4",
+            "uid": "nJ9d8xt-HyVzdNMu_j4p6",
             "lhsExpr": "res.body.website",
             "rhsExpr": "isString",
             "rhsOperand": "",
@@ -934,7 +1046,7 @@
         "preRequestTestResults": [],
         "postResponseTestResults": [],
         "shouldStopRunnerExecution": false,
-        "runDuration": 0.262632791,
+        "runDuration": 0.229886917,
         "name": "Create User",
         "path": "06-Collection Runner/Solution/Create User.yml",
         "iterationIndex": 4
@@ -954,7 +1066,7 @@
           "status": 200,
           "statusText": "OK",
           "headers": {
-            "date": "Wed, 18 Feb 2026 05:17:55 GMT",
+            "date": "Wed, 18 Feb 2026 15:********6:21 GMT",
             "content-type": "application/json; charset=utf-8",
             "transfer-encoding": "chunked",
             "connection": "close",
@@ -974,9 +1086,8 @@
             "x-ratelimit-limit": "1000",
             "x-ratelimit-remaining": "994",
             "x-ratelimit-reset": "1771166897",
-            "age": "22791",
-            "cf-cache-status": "HIT",
-            "cf-ray": "9cfb0f94eb1cb019-ATL",
+            "cf-cache-status": "REVALIDATED",
+            "cf-ray": "9cfe997d0cb11e97-ATL",
             "alt-svc": "h********=\":44********\"; ma=86400"
           },
           "data": {
@@ -1003,13 +1114,13 @@
             }
           },
           "url": "https://jsonplaceholder.typicode.com/users/5",
-          "responseTime": 44
+          "responseTime": 107
         },
         "error": null,
         "status": "pass",
         "assertionResults": [
           {
-            "uid": "arknGSUfeOHRjMMBgZN-g",
+            "uid": "L6D********S_8Pqh2HxWf-HwJ40",
             "lhsExpr": "res.status",
             "rhsExpr": "eq 200",
             "rhsOperand": "200",
@@ -1017,7 +1128,7 @@
             "status": "pass"
           },
           {
-            "uid": "m1Bu5BpWGw2-2YQnhXRJI",
+            "uid": "NJAsYO-9EdutDhuYkh9ql",
             "lhsExpr": "res.body",
             "rhsExpr": "isJson",
             "rhsOperand": "",
@@ -1025,7 +1136,7 @@
             "status": "pass"
           },
           {
-            "uid": "BA84OhX28antka-nXbVBQ",
+            "uid": "AciqUvdyF-_X1Hwri4mDI",
             "lhsExpr": "res.body.id",
             "rhsExpr": "isNumber",
             "rhsOperand": "",
@@ -1037,29 +1148,57 @@
           {
             "description": "User exists and has valid data",
             "status": "pass",
-            "uid": "lpFvGcwb********9Aglzrn0V********Lp"
+            "uid": "BHdYoFtd0eLMCnFMvkpMg"
           },
           {
             "description": "Response time is acceptable",
             "status": "pass",
-            "uid": "unlUOtVSzKiWGDxAFHd5c"
+            "uid": "pAIp9BXVS9ldUdgb1S_Gh"
           }
         ],
         "preRequestTestResults": [],
         "postResponseTestResults": [],
         "shouldStopRunnerExecution": false,
-        "runDuration": 0.147015833,
+        "runDuration": 0.216645375,
         "name": "Verify Creation",
         "path": "06-Collection Runner/Solution/Verify Creation.yml",
         "iterationIndex": 4
+      },
+      {
+        "test": {
+          "filename": ".github/workflows/collection-runner-tests.yml"
+        },
+        "request": {
+          "method": null,
+          "url": null,
+          "headers": null,
+          "data": null
+        },
+        "response": {
+          "status": "skipped",
+          "statusText": "Invalid item: missing type",
+          "data": null,
+          "responseTime": 0
+        },
+        "error": "Invalid item: missing type",
+        "status": "skipped",
+        "skipped": true,
+        "assertionResults": [],
+        "testResults": [],
+        "preRequestTestResults": [],
+        "postResponseTestResults": [],
+        "runDuration": 0,
+        "suitename": ".github/workflows/collection-runner-tests",
+        "name": "collection-runner-tests.yml",
+        "path": ".github/workflows/collection-runner-tests.yml"
       }
     ],
     "summary": {
-      "totalRequests": 2,
+      "totalRequests": 3,
       "passedRequests": 2,
       "failedRequests": 0,
       "errorRequests": 0,
-      "skippedRequests": 0,
+      "skippedRequests": 1,
       "totalAssertions": 6,
       "passedAssertions": 6,
       "failedAssertions": 0,
