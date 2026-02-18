@@ -1,0 +1,144 @@
+info:
+  name: 05-Scripts and Chaining
+  type: folder
+  seq: 5
+
+request: {}
+
+docs:
+  content: |-
+    # ⚡ Section 4: Scripts and Chaining
+
+    Scripts let you run JavaScript **before** and **after** requests — enabling powerful automation workflows.
+
+    In this section, you will:
+
+    - ✅ Write pre-request scripts to generate dynamic data
+    - ✅ Write post-response scripts to capture data from responses
+    - ✅ Chain requests together using runtime variables
+
+    ---
+
+    ### ⚡ Step 1: Create "Pre-Request Scripting"
+
+    1. Right-click on the `04-Scripts and Chaining` folder → **New Request**
+    2. Name it `Pre-Request Scripting`
+    3. Set the method to **POST**
+    4. Set the URL to: `{{echoUrl}}`
+    5. Go to **Body** → **JSON** and paste:
+
+    ```json
+    {
+      "generatedAt": "{{timestamp}}",
+      "daysAgo": "{{pastDate}}",
+      "requestId": "{{requestId}}"
+    }
+    ```
+
+    6. Go to the **Script** tab → **Pre Request** and paste:
+
+    ```javascript
+    const now = new Date();
+    bru.setVar("timestamp", now.toISOString());
+
+    const past = new Date(now);
+    past.setDate(past.getDate() - 7);
+    bru.setVar("pastDate", past.toISOString().split("T")[0]);
+
+    const id = `req_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`;
+    bru.setVar("requestId", id);
+
+    console.log("📝 Generated request ID:", id);
+    ```
+
+    7. Click **Send** ▶️ — the echo server returns the generated values!
+    8. Check the **Timeline** tab to see the `console.log()` output
+
+    ---
+
+    ### 🔗 Step 2: Create "Capture and Reuse"
+
+    This request creates a post and **captures the returned ID** for the next request.
+
+    1. Create a new request named `Capture and Reuse`
+    2. Set the method to **POST**
+    3. Set the URL to: `{{baseUrl}}/posts`
+    4. Go to **Body** → **JSON** and paste:
+
+    ```json
+    {
+      "title": "Created by Bruno",
+      "body": "This post was created during the workshop to demonstrate variable chaining.",
+      "userId": {{defaultUserId}}
+    }
+    ```
+
+    5. Go to the **Script** tab → **Post Response** and paste:
+
+    ```javascript
+    const body = res.getBody();
+
+    if (body && body.id) {
+      bru.setVar("capturedPostId", body.id);
+      bru.setVar("capturedPostTitle", body.title);
+      console.log("✅ Captured post ID:", body.id);
+    }
+    ```
+
+    6. Go to the **Tests** tab and paste:
+
+    ```javascript
+    test("Post was created successfully", () => {
+      expect(res.status).to.equal(201);
+      expect(res.getBody()).to.have.property("id");
+    });
+    ```
+
+    7. Click **Send** ▶️ — you should get **201 Created** and the post ID is now stored!
+
+    ---
+
+    ### 🔗 Step 3: Create "Use Captured Data"
+
+    ⚠️ **Run Step 2 first!** This request depends on the captured post ID.
+
+    1. Create a new request named `Use Captured Data`
+    2. Set the method to **GET**
+    3. Set the URL to: `{{baseUrl}}/posts/{{capturedPostId}}`
+    4. Go to the **Script** tab → **Pre Request** and paste:
+
+    ```javascript
+    const postId = bru.getVar("capturedPostId");
+
+    if (!postId) {
+      console.warn("⚠️ No captured post ID found! Run 'Capture and Reuse' first.");
+    } else {
+      console.log("🔗 Using captured post ID:", postId);
+    }
+    ```
+
+    5. Go to the **Tests** tab and paste:
+
+    ```javascript
+    test("Retrieved a valid post", () => {
+      const body = res.getBody();
+      expect(body).to.have.property("id");
+      expect(body).to.have.property("title");
+      expect(body).to.have.property("body");
+    });
+    ```
+
+    6. Click **Send** ▶️ — it uses the ID from Step 2 to fetch the post!
+
+    ---
+
+    ### 📌 Summary
+
+    In this section, you learned how to:
+
+    - ✅ Use pre-request scripts to generate dynamic data with `bru.setVar()`
+    - ✅ Use post-response scripts to capture response data
+    - ✅ Chain requests using runtime variables (`bru.setVar()` / `bru.getVar()`)
+
+    📁 Check the **Solution** folder to see the completed requests.
+  type: text/markdown

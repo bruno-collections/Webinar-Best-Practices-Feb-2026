@@ -1,0 +1,53 @@
+info:
+  name: Bearer Login
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{httpFakerUrl}}/api/auth/bearer/login"
+  body:
+    type: form-urlencoded
+    data:
+      - name: username
+        value: "{{authUsername}}"
+      - name: password
+        value: "{{authPassword}}"
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        const body = res.getBody();
+
+        if (body && body.token) {
+          bru.setVar("bearerToken", body.token);
+          console.log("🔑 Captured bearer token:", body.token);
+        }
+    - type: tests
+      code: |-
+        test("Login returns a token", () => {
+          const body = res.getBody();
+          expect(res.status).to.equal(200);
+          expect(body).to.have.property("token");
+          expect(body.token).to.be.a("string");
+        });
+  assertions:
+    - expression: res.status
+      operator: eq
+      value: "200"
+    - expression: res.body.token
+      operator: isString
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  ## Bearer Login
+
+  Logs in with username/password and captures the returned token using a post-response script.
+
+  The token is stored as `{{bearerToken}}` for the next request.

@@ -1,0 +1,174 @@
+meta {
+  name: 03-Tests and Assertions
+  seq: 3
+}
+
+docs {
+  # ✅ Section 3: Tests and Assertions
+
+  Bruno provides two powerful ways to validate API responses:
+
+  1. **Assert block** — Simple, declarative, no code needed
+  2. **Tests block** — Full JavaScript with Chai.js assertions
+
+  In this section, you will:
+
+  - ✅ Write declarative assertions with the `assert` tab
+  - ✅ Write JavaScript test suites with `tests {}`
+  - ✅ Combine both approaches
+  - ✅ Use an external library (Zod) for schema validation
+
+  ---
+
+  ### ✅ Step 1: Create "Assert Basics"
+
+  1. Right-click on the `03-Tests and Assertions` folder → **New Request**
+  2. Name it `Assert Basics`
+  3. Set the method to **GET**
+  4. Set the URL to: `{{dogApiUrl}}/facts`
+  5. Go to the **Assert** tab
+  6. Add the following assertions:
+
+  | Expr | Operator | Value |
+  |------|----------|-------|
+  | res.status | equals | 200 |
+  | res.body | isJson | |
+  | res.body.data | isArray | |
+
+  7. Click **Send** ▶️
+  8. Check the **Tests** tab in the response panel — you should see all assertions pass! ✅
+
+  💡 Available operators: `eq`, `neq`, `gt`, `gte`, `lt`, `lte`, `contains`, `isNumber`, `isString`, `isBoolean`, `isArray`, `isJson`
+
+  ---
+
+  ### 🧪 Step 2: Create "Chai.js Tests"
+
+  1. Create a new request named `Chai.js Tests`
+  2. Set the method to **GET**
+  3. Set the URL to: `{{baseUrl}}/users/{{defaultUserId}}`
+  4. Go to the **Assert** tab and add:
+
+  | Expr | Operator | Value |
+  |------|----------|-------|
+  | res.status | equals | 200 |
+  | res.body.id | isNumber | |
+  | res.body.email | isString | |
+
+  5. Go to the **Tests** tab and paste:
+
+  ```javascript
+  const body = res.getBody();
+
+  test("Status is 200 OK", () => {
+    expect(res.status).to.equal(200);
+  });
+
+  test("User has required fields", () => {
+    expect(body).to.have.property("id");
+    expect(body).to.have.property("name");
+    expect(body).to.have.property("email");
+    expect(body).to.have.property("username");
+  });
+
+  test("Email is valid format", () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    expect(body.email).to.match(emailRegex);
+  });
+
+  test("User ID matches expected type", () => {
+    expect(body.id).to.be.a("number");
+    expect(body.id).to.be.greaterThan(0);
+  });
+  ```
+
+  6. Click **Send** ▶️ — check the **Tests** tab to see both assertions and test results!
+
+  ---
+
+  ### 🏆 Step 3: Create "Full Test Suite"
+
+  This one combines assertions, Chai.js tests, AND an external library (Zod) for schema validation.
+
+  1. Create a new request named `Full Test Suite`
+  2. Set the method to **GET**
+  3. Set the URL to: `{{baseUrl}}/users`
+  4. Go to the **Assert** tab and add:
+
+  | Expr | Operator | Value |
+  |------|----------|-------|
+  | res.status | equals | 200 |
+  | res.body | isJson | |
+  | res.body | isArray | |
+
+  5. Go to the **Tests** tab and paste:
+
+  ```javascript
+  const { z } = require("zod");
+  const body = res.getBody();
+
+  test("Returns 200 OK", () => {
+    expect(res.status).to.equal(200);
+  });
+
+  test("Response is an array of users", () => {
+    expect(body).to.be.an("array");
+    expect(body.length).to.be.greaterThan(0);
+  });
+
+  test("Each user has core fields", () => {
+    body.forEach((user, i) => {
+      expect(user, `User ${i}`).to.have.property("id");
+      expect(user, `User ${i}`).to.have.property("name");
+      expect(user, `User ${i}`).to.have.property("email");
+    });
+  });
+
+  const UserSchema = z.object({
+    id: z.number().int().positive(),
+    name: z.string().min(1),
+    username: z.string().min(1),
+    email: z.string().email(),
+    phone: z.string(),
+    website: z.string(),
+    address: z.object({ street: z.string(), city: z.string(), zipcode: z.string() }).passthrough(),
+    company: z.object({ name: z.string() }).passthrough()
+  });
+
+  test("All users pass Zod schema validation", () => {
+    body.forEach((user, i) => {
+      const result = UserSchema.safeParse(user);
+      expect(result.success, `User ${i} (${user.name}) failed`).to.be.true;
+    });
+  });
+  ```
+
+  6. Click **Send** ▶️ — all tests should pass, including Zod schema validation!
+
+  🔌 **Note:** Zod is an npm package included in this collection's `package.json`. Bruno supports loading external libraries — just `npm install` in the collection root.
+
+  ---
+
+  ### 💻 Run from the CLI
+
+  Everything you tested in the GUI can also run headless from the terminal:
+
+  ```bash
+  bru run "03-Tests and Assertions" --env Workshop
+  bru run "03-Tests and Assertions" --env Workshop --reporter-html reports/tests-report.html
+  bru run "03-Tests and Assertions" --env Workshop --reporter-junit reports/tests-report.xml
+  ```
+
+  ---
+
+  ### 📌 Summary
+
+  In this section, you learned how to:
+
+  - ✅ Write declarative assertions (no code needed)
+  - ✅ Write Chai.js test suites with `expect()`
+  - ✅ Combine both approaches
+  - ✅ Use external npm libraries (Zod) for schema validation
+
+  📁 Check the **Solution** folder to see the completed requests.
+}

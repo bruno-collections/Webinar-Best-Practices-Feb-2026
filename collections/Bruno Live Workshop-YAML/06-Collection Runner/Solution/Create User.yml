@@ -1,0 +1,63 @@
+info:
+  name: Create User
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{echoUrl}}"
+  body:
+    type: json
+    data: |-
+      {
+        "name": "{{name}}",
+        "job": "{{job}}"
+      }
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        const body = res.getBody();
+
+        test("User data was echoed back", () => {
+          expect(body).to.have.property("name");
+          expect(body).to.have.property("job");
+          expect(body.name).to.be.a("string");
+          expect(body.job).to.be.a("string");
+        });
+
+        test("Name is not empty", () => {
+          expect(body.name.length).to.be.greaterThan(0);
+        });
+  assertions:
+    - expression: res.status
+      operator: eq
+      value: "200"
+    - expression: res.body.name
+      operator: isString
+    - expression: res.body.job
+      operator: isString
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  # Create User 👤
+
+  This request sends user data to the echo server.
+
+  **When run normally:** Uses default variable values (will be empty)
+  **When run with a data file:** `{{name}}` and `{{job}}` are replaced with values from each row in the CSV/JSON file
+
+  ## Data File Format (CSV)
+  ```
+  name,job
+  Alice Johnson,Frontend Developer
+  Bob Williams,Backend Engineer
+  ```
+
+  Each row becomes a separate execution of this request!

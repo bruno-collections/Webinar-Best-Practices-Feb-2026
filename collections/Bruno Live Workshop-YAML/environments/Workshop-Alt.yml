@@ -1,0 +1,12 @@
+name: Workshop-Alt
+variables:
+  - name: baseUrl
+    value: https://jsonplaceholder.typicode.com
+  - name: echoUrl
+    value: https://echo.usebruno.com
+  - name: dogApiUrl
+    value: https://dogapi.dog/api/v2
+  - name: defaultUserId
+    value: "5"
+  - name: appName
+    value: Bruno Workshop (Alternate)

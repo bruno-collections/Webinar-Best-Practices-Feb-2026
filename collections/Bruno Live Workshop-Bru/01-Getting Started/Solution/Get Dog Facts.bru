@@ -1,0 +1,21 @@
+meta {
+  name: Get Dog Facts
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{dogApiUrl}}/facts
+  body: none
+  auth: none
+}
+
+docs {
+  # Get Dog Facts 🐕
+  
+  Fetches a random dog fact from the Dog API.
+  
+  Notice how the response is structured JSON — Bruno auto-formats it for you.
+  
+  **Try it:** Look at the response body. Each fact has an `id`, `type`, and `attributes.body`.
+}
