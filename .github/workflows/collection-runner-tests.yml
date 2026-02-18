@@ -30,7 +30,7 @@ jobs:
             --output results.json \
             --reporter-json results.json \
             --reporter-html results.html \
-            --json-file-path ../../users.json
+            --json-file-path users.json
 
       - name: Upload Test Results
         if: always()
