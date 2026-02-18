@@ -1,0 +1,1077 @@
+[
+  {
+    "iterationIndex": 0,
+    "results": [
+      {
+        "test": {
+          "filename": "06-Collection Runner/Solution/Create User.yml"
+        },
+        "request": {
+          "method": "POST",
+          "url": "https://echo.usebruno.com",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "data": "{\n  \"name\": \"Leanne Graham\",\n  \"website\": \"hildegard.org\"\n}"
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "headers": {
+            "server": "nginx/1.18.0 (Ubuntu)",
+            "date": "Wed, 18 Feb 2026 05:17:5******** GMT",
+            "content-type": "application/json",
+            "content-length": "59",
+            "connection": "close",
+            "host": "echo.usebruno.com:44********",
+            "x-real-ip": "104.178.200.102",
+            "x-forwarded-for": "104.178.200.102",
+            "x-forwarded-proto": "https",
+            "accept": "application/json, text/plain, */*",
+            "user-agent": "bruno-runtime/********.1.1",
+            "request-start-time": "1771********9187********459",
+            "accept-encoding": "gzip, compress, deflate, br",
+            "strict-transport-security": "max-age=6********072000; includeSubdomains",
+            "x-frame-options": "DENY",
+            "x-content-type-options": "nosniff"
+          },
+          "data": {
+            "name": "Leanne Graham",
+            "website": "hildegard.org"
+          },
+          "url": "https://echo.usebruno.com/",
+          "responseTime": 186
+        },
+        "error": null,
+        "status": "pass",
+        "assertionResults": [
+          {
+            "uid": "ZUi9-WQGhWwCXt6VmT9bV",
+            "lhsExpr": "res.status",
+            "rhsExpr": "eq 200",
+            "rhsOperand": "200",
+            "operator": "eq",
+            "status": "pass"
+          },
+          {
+            "uid": "y_hBCXFzX5ge6EWsiii7D",
+            "lhsExpr": "res.body.name",
+            "rhsExpr": "isString",
+            "rhsOperand": "",
+            "operator": "isString",
+            "status": "pass"
+          },
+          {
+            "uid": "sap5XSzGpcP56oLHXA8qH",
+            "lhsExpr": "res.body.website",
+            "rhsExpr": "isString",
+            "rhsOperand": "",
+            "operator": "isString",
+            "status": "pass"
+          }
+        ],
+        "testResults": [],
+        "preRequestTestResults": [],
+        "postResponseTestResults": [],
+        "shouldStopRunnerExecution": false,
+        "runDuration": 0.275064,
+        "name": "Create User",
+        "path": "06-Collection Runner/Solution/Create User.yml",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "06-Collection Runner/Solution/Verify Creation.yml"
+        },
+        "request": {
+          "method": "GET",
+          "url": "https://jsonplaceholder.typicode.com/users/1",
+          "headers": {
+            "content-type": null
+          }
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "headers": {
+            "date": "Wed, 18 Feb 2026 05:17:5******** GMT",
+            "content-type": "application/json; charset=utf-8",
+            "transfer-encoding": "chunked",
+            "connection": "close",
+            "access-control-allow-credentials": "true",
+            "cache-control": "max-age=4********200",
+            "etag": "W/\"1fd-+2Y********G********w049iSZtw5t1mzSnunngE\"",
+            "expires": "-1",
+            "nel": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":********600,\"success_fraction\":0.01,\"failure_fraction\":0.1}",
+            "pragma": "no-cache",
+            "report-to": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=2S9AuSSQ0fG%2B%2FRgBjk0ouCpP1WCyHotVSy29H5tEG6s%********D\\u0026sid=e11707d5-02a7-4********ef-b45e-2cf4d20********6f7d\\u0026ts=1771********89706\"}],\"max_age\":********600}",
+            "reporting-endpoints": "heroku-nel=\"https://nel.heroku.com/reports?s=2S9AuSSQ0fG%2B%2FRgBjk0ouCpP1WCyHotVSy29H5tEG6s%********D&sid=e11707d5-02a7-4********ef-b45e-2cf4d20********6f7d&ts=1771********89706\"",
+            "server": "cloudflare",
+            "vary": "Origin, Accept-Encoding",
+            "via": "2.0 heroku-router",
+            "x-content-type-options": "nosniff",
+            "x-powered-by": "Express",
+            "x-ratelimit-limit": "1000",
+            "x-ratelimit-remaining": "802",
+            "x-ratelimit-reset": "1771********89711",
+            "age": "2167",
+            "cf-cache-status": "HIT",
+            "cf-ray": "9cfb0f8afc2********bd2b-ATL",
+            "alt-svc": "h********=\":44********\"; ma=86400"
+          },
+          "data": {
+            "id": 1,
+            "name": "Leanne Graham",
+            "username": "Bret",
+            "email": "Sincere@april.biz",
+            "address": {
+              "street": "Kulas Light",
+              "suite": "Apt. 556",
+              "city": "Gwenborough",
+              "zipcode": "92998-********874",
+              "geo": {
+                "lat": "-********7.********159",
+                "lng": "81.1496"
+              }
+            },
+            "phone": "1-770-7********6-80********1 x56442",
+            "website": "hildegard.org",
+            "company": {
+              "name": "Romaguera-Crona",
+              "catchPhrase": "Multi-layered client-server neural-net",
+              "bs": "harness real-time e-markets"
+            }
+          },
+          "url": "https://jsonplaceholder.typicode.com/users/1",
+          "responseTime": 69
+        },
+        "error": null,
+        "status": "pass",
+        "assertionResults": [
+          {
+            "uid": "9LL-m0FWPKRjxo7ng********y5Z",
+            "lhsExpr": "res.status",
+            "rhsExpr": "eq 200",
+            "rhsOperand": "200",
+            "operator": "eq",
+            "status": "pass"
+          },
+          {
+            "uid": "PtLowLc6Oc2-acsvI2zw6",
+            "lhsExpr": "res.body",
+            "rhsExpr": "isJson",
+            "rhsOperand": "",
+            "operator": "isJson",
+            "status": "pass"
+          },
+          {
+            "uid": "9sjZCsrvrs4HSYtogXXQl",
+            "lhsExpr": "res.body.id",
+            "rhsExpr": "isNumber",
+            "rhsOperand": "",
+            "operator": "isNumber",
+            "status": "pass"
+          }
+        ],
+        "testResults": [
+          {
+            "description": "User exists and has valid data",
+            "status": "pass",
+            "uid": "t0yEld0JJ29WMCz26Pc5M"
+          },
+          {
+            "description": "Response time is acceptable",
+            "status": "pass",
+            "uid": "XWOdPvsunu1z********gfoC1HRp"
+          }
+        ],
+        "preRequestTestResults": [],
+        "postResponseTestResults": [],
+        "shouldStopRunnerExecution": false,
+        "runDuration": 0.158751917,
+        "name": "Verify Creation",
+        "path": "06-Collection Runner/Solution/Verify Creation.yml",
+        "iterationIndex": 0
+      }
+    ],
+    "summary": {
+      "totalRequests": 2,
+      "passedRequests": 2,
+      "failedRequests": 0,
+      "errorRequests": 0,
+      "skippedRequests": 0,
+      "totalAssertions": 6,
+      "passedAssertions": 6,
+      "failedAssertions": 0,
+      "totalTests": 2,
+      "passedTests": 2,
+      "failedTests": 0,
+      "totalPreRequestTests": 0,
+      "passedPreRequestTests": 0,
+      "failedPreRequestTests": 0,
+      "totalPostResponseTests": 0,
+      "passedPostResponseTests": 0,
+      "failedPostResponseTests": 0
+    }
+  },
+  {
+    "iterationIndex": 1,
+    "results": [
+      {
+        "test": {
+          "filename": "06-Collection Runner/Solution/Create User.yml"
+        },
+        "request": {
+          "method": "POST",
+          "url": "https://echo.usebruno.com",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "data": "{\n  \"name\": \"Ervin Howell\",\n  \"website\": \"anastasia.net\"\n}"
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "headers": {
+            "server": "nginx/1.18.0 (Ubuntu)",
+            "date": "Wed, 18 Feb 2026 05:17:5******** GMT",
+            "content-type": "application/json",
+            "content-length": "58",
+            "connection": "close",
+            "host": "echo.usebruno.com:44********",
+            "x-real-ip": "104.178.200.102",
+            "x-forwarded-for": "104.178.200.102",
+            "x-forwarded-proto": "https",
+            "accept": "application/json, text/plain, */*",
+            "user-agent": "bruno-runtime/********.1.1",
+            "request-start-time": "1771********9187********847",
+            "accept-encoding": "gzip, compress, deflate, br",
+            "strict-transport-security": "max-age=6********072000; includeSubdomains",
+            "x-frame-options": "DENY",
+            "x-content-type-options": "nosniff"
+          },
+          "data": {
+            "name": "Ervin Howell",
+            "website": "anastasia.net"
+          },
+          "url": "https://echo.usebruno.com/",
+          "responseTime": 264
+        },
+        "error": null,
+        "status": "pass",
+        "assertionResults": [
+          {
+            "uid": "tvl0gTW8hOoUrN4XpDCbi",
+            "lhsExpr": "res.status",
+            "rhsExpr": "eq 200",
+            "rhsOperand": "200",
+            "operator": "eq",
+            "status": "pass"
+          },
+          {
+            "uid": "HEGxu0erQR1ByKFELB********Wv",
+            "lhsExpr": "res.body.name",
+            "rhsExpr": "isString",
+            "rhsOperand": "",
+            "operator": "isString",
+            "status": "pass"
+          },
+          {
+            "uid": "mVAL1LAuziisEH1i********2IZX",
+            "lhsExpr": "res.body.website",
+            "rhsExpr": "isString",
+            "rhsOperand": "",
+            "operator": "isString",
+            "status": "pass"
+          }
+        ],
+        "testResults": [],
+        "preRequestTestResults": [],
+        "postResponseTestResults": [],
+        "shouldStopRunnerExecution": false,
+        "runDuration": 0.298941292,
+        "name": "Create User",
+        "path": "06-Collection Runner/Solution/Create User.yml",
+        "iterationIndex": 1
+      },
+      {
+        "test": {
+          "filename": "06-Collection Runner/Solution/Verify Creation.yml"
+        },
+        "request": {
+          "method": "GET",
+          "url": "https://jsonplaceholder.typicode.com/users/2",
+          "headers": {
+            "content-type": null
+          }
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "headers": {
+            "date": "Wed, 18 Feb 2026 05:17:54 GMT",
+            "content-type": "application/json; charset=utf-8",
+            "transfer-encoding": "chunked",
+            "connection": "close",
+            "access-control-allow-credentials": "true",
+            "cache-control": "max-age=4********200",
+            "etag": "W/\"1fd-XTG6********SYhaP/Uo6/vgmARnL********rpBk\"",
+            "expires": "-1",
+            "nel": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":********600,\"success_fraction\":0.01,\"failure_fraction\":0.1}",
+            "pragma": "no-cache",
+            "report-to": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=NoDjJWHHs6b8wG8ridboV%2FbdY8mfC6********K6BeQCr0tysU%********D\\u0026sid=e11707d5-02a7-4********ef-b45e-2cf4d20********6f7d\\u0026ts=1771********8027********\"}],\"max_age\":********600}",
+            "reporting-endpoints": "heroku-nel=\"https://nel.heroku.com/reports?s=NoDjJWHHs6b8wG8ridboV%2FbdY8mfC6********K6BeQCr0tysU%********D&sid=e11707d5-02a7-4********ef-b45e-2cf4d20********6f7d&ts=1771********8027********\"",
+            "server": "cloudflare",
+            "vary": "Origin, Accept-Encoding",
+            "via": "2.0 heroku-router",
+            "x-content-type-options": "nosniff",
+            "x-powered-by": "Express",
+            "x-ratelimit-limit": "1000",
+            "x-ratelimit-remaining": "999",
+            "x-ratelimit-reset": "1771********80291",
+            "age": "11600",
+            "cf-cache-status": "HIT",
+            "cf-ray": "9cfb0f8dcf8********7252-ATL",
+            "alt-svc": "h********=\":44********\"; ma=86400"
+          },
+          "data": {
+            "id": 2,
+            "name": "Ervin Howell",
+            "username": "Antonette",
+            "email": "Shanna@melissa.tv",
+            "address": {
+              "street": "Victor Plains",
+              "suite": "Suite 879",
+              "city": "Wisokyburgh",
+              "zipcode": "90566-7771",
+              "geo": {
+                "lat": "-4********.9509",
+                "lng": "-********4.4618"
+              }
+            },
+            "phone": "010-692-659******** x09125",
+            "website": "anastasia.net",
+            "company": {
+              "name": "Deckow-Crist",
+              "catchPhrase": "Proactive didactic contingency",
+              "bs": "synergize scalable supply-chains"
+            }
+          },
+          "url": "https://jsonplaceholder.typicode.com/users/2",
+          "responseTime": 52
+        },
+        "error": null,
+        "status": "pass",
+        "assertionResults": [
+          {
+            "uid": "_QYc-M********Yjhud********ffAJMg1Y",
+            "lhsExpr": "res.status",
+            "rhsExpr": "eq 200",
+            "rhsOperand": "200",
+            "operator": "eq",
+            "status": "pass"
+          },
+          {
+            "uid": "cwTpFqXa********64VQB9FbS9ni",
+            "lhsExpr": "res.body",
+            "rhsExpr": "isJson",
+            "rhsOperand": "",
+            "operator": "isJson",
+            "status": "pass"
+          },
+          {
+            "uid": "gHrm-tAhzGmTvB-oBmQfs",
+            "lhsExpr": "res.body.id",
+            "rhsExpr": "isNumber",
+            "rhsOperand": "",
+            "operator": "isNumber",
+            "status": "pass"
+          }
+        ],
+        "testResults": [
+          {
+            "description": "User exists and has valid data",
+            "status": "pass",
+            "uid": "Q9YAADbbjbsEI********SEBzYuF"
+          },
+          {
+            "description": "Response time is acceptable",
+            "status": "pass",
+            "uid": "XKM8A-elEKzdegAJZC6dz"
+          }
+        ],
+        "preRequestTestResults": [],
+        "postResponseTestResults": [],
+        "shouldStopRunnerExecution": false,
+        "runDuration": 0.152650083,
+        "name": "Verify Creation",
+        "path": "06-Collection Runner/Solution/Verify Creation.yml",
+        "iterationIndex": 1
+      }
+    ],
+    "summary": {
+      "totalRequests": 2,
+      "passedRequests": 2,
+      "failedRequests": 0,
+      "errorRequests": 0,
+      "skippedRequests": 0,
+      "totalAssertions": 6,
+      "passedAssertions": 6,
+      "failedAssertions": 0,
+      "totalTests": 2,
+      "passedTests": 2,
+      "failedTests": 0,
+      "totalPreRequestTests": 0,
+      "passedPreRequestTests": 0,
+      "failedPreRequestTests": 0,
+      "totalPostResponseTests": 0,
+      "passedPostResponseTests": 0,
+      "failedPostResponseTests": 0
+    }
+  },
+  {
+    "iterationIndex": 2,
+    "results": [
+      {
+        "test": {
+          "filename": "06-Collection Runner/Solution/Create User.yml"
+        },
+        "request": {
+          "method": "POST",
+          "url": "https://echo.usebruno.com",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "data": "{\n  \"name\": \"Clementine Bauch\",\n  \"website\": \"ramiro.info\"\n}"
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "headers": {
+            "server": "nginx/1.18.0 (Ubuntu)",
+            "date": "Wed, 18 Feb 2026 05:17:54 GMT",
+            "content-type": "application/json",
+            "content-length": "60",
+            "connection": "close",
+            "host": "echo.usebruno.com:44********",
+            "x-real-ip": "104.178.200.102",
+            "x-forwarded-for": "104.178.200.102",
+            "x-forwarded-proto": "https",
+            "accept": "application/json, text/plain, */*",
+            "user-agent": "bruno-runtime/********.1.1",
+            "request-start-time": "1771********91874********11",
+            "accept-encoding": "gzip, compress, deflate, br",
+            "strict-transport-security": "max-age=6********072000; includeSubdomains",
+            "x-frame-options": "DENY",
+            "x-content-type-options": "nosniff"
+          },
+          "data": {
+            "name": "Clementine Bauch",
+            "website": "ramiro.info"
+          },
+          "url": "https://echo.usebruno.com/",
+          "responseTime": 103
+        },
+        "error": null,
+        "status": "pass",
+        "assertionResults": [
+          {
+            "uid": "c6uQbW9ULnwIlo62iUbEx",
+            "lhsExpr": "res.status",
+            "rhsExpr": "eq 200",
+            "rhsOperand": "200",
+            "operator": "eq",
+            "status": "pass"
+          },
+          {
+            "uid": "LkzEab8E44f_l-cmP_CT4",
+            "lhsExpr": "res.body.name",
+            "rhsExpr": "isString",
+            "rhsOperand": "",
+            "operator": "isString",
+            "status": "pass"
+          },
+          {
+            "uid": "gLYg********aElu1HNa********EYEG0ZZ",
+            "lhsExpr": "res.body.website",
+            "rhsExpr": "isString",
+            "rhsOperand": "",
+            "operator": "isString",
+            "status": "pass"
+          }
+        ],
+        "testResults": [],
+        "preRequestTestResults": [],
+        "postResponseTestResults": [],
+        "shouldStopRunnerExecution": false,
+        "runDuration": 0.14702575,
+        "name": "Create User",
+        "path": "06-Collection Runner/Solution/Create User.yml",
+        "iterationIndex": 2
+      },
+      {
+        "test": {
+          "filename": "06-Collection Runner/Solution/Verify Creation.yml"
+        },
+        "request": {
+          "method": "GET",
+          "url": "https://jsonplaceholder.typicode.com/users/********",
+          "headers": {
+            "content-type": null
+          }
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "headers": {
+            "date": "Wed, 18 Feb 2026 05:17:54 GMT",
+            "content-type": "application/json; charset=utf-8",
+            "transfer-encoding": "chunked",
+            "connection": "close",
+            "access-control-allow-credentials": "true",
+            "cache-control": "max-age=4********200",
+            "etag": "W/\"208-uuwhfwQMzFzbJr9Pg6DKXae0SXA\"",
+            "expires": "-1",
+            "nel": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":********600,\"success_fraction\":0.01,\"failure_fraction\":0.1}",
+            "pragma": "no-cache",
+            "report-to": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=CkAsR********Hb7k5CrvHPc4wcSrH%2BXzEUo0hk8cDmX0tCHg0%********D\\u0026sid=e11707d5-02a7-4********ef-b45e-2cf4d20********6f7d\\u0026ts=1770987089\"}],\"max_age\":********600}",
+            "reporting-endpoints": "heroku-nel=\"https://nel.heroku.com/reports?s=CkAsR********Hb7k5CrvHPc4wcSrH%2BXzEUo0hk8cDmX0tCHg0%********D&sid=e11707d5-02a7-4********ef-b45e-2cf4d20********6f7d&ts=1770987089\"",
+            "server": "cloudflare",
+            "vary": "Origin, Accept-Encoding",
+            "via": "2.0 heroku-router",
+            "x-content-type-options": "nosniff",
+            "x-powered-by": "Express",
+            "x-ratelimit-limit": "1000",
+            "x-ratelimit-remaining": "999",
+            "x-ratelimit-reset": "1770987092",
+            "age": "15005",
+            "cf-cache-status": "HIT",
+            "cf-ray": "9cfb0f907e7f********29a-ATL",
+            "alt-svc": "h********=\":44********\"; ma=86400"
+          },
+          "data": {
+            "id": 3,
+            "name": "Clementine Bauch",
+            "username": "Samantha",
+            "email": "Nathan@yesenia.net",
+            "address": {
+              "street": "Douglas Extension",
+              "suite": "Suite 847",
+              "city": "McKenziehaven",
+              "zipcode": "59590-4157",
+              "geo": {
+                "lat": "-68.6102",
+                "lng": "-47.065********"
+              }
+            },
+            "phone": "1-46********-12********-4447",
+            "website": "ramiro.info",
+            "company": {
+              "name": "Romaguera-Jacobson",
+              "catchPhrase": "Face to face bifurcated interface",
+              "bs": "e-enable strategic applications"
+            }
+          },
+          "url": "https://jsonplaceholder.typicode.com/users/********",
+          "responseTime": 186
+        },
+        "error": null,
+        "status": "pass",
+        "assertionResults": [
+          {
+            "uid": "mZfgd0n01LPJRkeMAXX2t",
+            "lhsExpr": "res.status",
+            "rhsExpr": "eq 200",
+            "rhsOperand": "200",
+            "operator": "eq",
+            "status": "pass"
+          },
+          {
+            "uid": "Sgq_nPkYSsJ0dePu0xJej",
+            "lhsExpr": "res.body",
+            "rhsExpr": "isJson",
+            "rhsOperand": "",
+            "operator": "isJson",
+            "status": "pass"
+          },
+          {
+            "uid": "bhwZvkjBvVahk-jFbUaC4",
+            "lhsExpr": "res.body.id",
+            "rhsExpr": "isNumber",
+            "rhsOperand": "",
+            "operator": "isNumber",
+            "status": "pass"
+          }
+        ],
+        "testResults": [
+          {
+            "description": "User exists and has valid data",
+            "status": "pass",
+            "uid": "MprQXrSuo9t6XKJ2rJmZJ"
+          },
+          {
+            "description": "Response time is acceptable",
+            "status": "pass",
+            "uid": "w4vfGAt7QXaqcNWXfdPmW"
+          }
+        ],
+        "preRequestTestResults": [],
+        "postResponseTestResults": [],
+        "shouldStopRunnerExecution": false,
+        "runDuration": 0.29741775,
+        "name": "Verify Creation",
+        "path": "06-Collection Runner/Solution/Verify Creation.yml",
+        "iterationIndex": 2
+      }
+    ],
+    "summary": {
+      "totalRequests": 2,
+      "passedRequests": 2,
+      "failedRequests": 0,
+      "errorRequests": 0,
+      "skippedRequests": 0,
+      "totalAssertions": 6,
+      "passedAssertions": 6,
+      "failedAssertions": 0,
+      "totalTests": 2,
+      "passedTests": 2,
+      "failedTests": 0,
+      "totalPreRequestTests": 0,
+      "passedPreRequestTests": 0,
+      "failedPreRequestTests": 0,
+      "totalPostResponseTests": 0,
+      "passedPostResponseTests": 0,
+      "failedPostResponseTests": 0
+    }
+  },
+  {
+    "iterationIndex": 3,
+    "results": [
+      {
+        "test": {
+          "filename": "06-Collection Runner/Solution/Create User.yml"
+        },
+        "request": {
+          "method": "POST",
+          "url": "https://echo.usebruno.com",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "data": "{\n  \"name\": \"Patricia Lebsack\",\n  \"website\": \"kale.biz\"\n}"
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "headers": {
+            "server": "nginx/1.18.0 (Ubuntu)",
+            "date": "Wed, 18 Feb 2026 05:17:54 GMT",
+            "content-type": "application/json",
+            "content-length": "57",
+            "connection": "close",
+            "host": "echo.usebruno.com:44********",
+            "x-real-ip": "104.178.200.102",
+            "x-forwarded-for": "104.178.200.102",
+            "x-forwarded-proto": "https",
+            "accept": "application/json, text/plain, */*",
+            "user-agent": "bruno-runtime/********.1.1",
+            "request-start-time": "1771********91874756",
+            "accept-encoding": "gzip, compress, deflate, br",
+            "strict-transport-security": "max-age=6********072000; includeSubdomains",
+            "x-frame-options": "DENY",
+            "x-content-type-options": "nosniff"
+          },
+          "data": {
+            "name": "Patricia Lebsack",
+            "website": "kale.biz"
+          },
+          "url": "https://echo.usebruno.com/",
+          "responseTime": 97
+        },
+        "error": null,
+        "status": "pass",
+        "assertionResults": [
+          {
+            "uid": "TYaVxGLxH********-29PK8j4IdU",
+            "lhsExpr": "res.status",
+            "rhsExpr": "eq 200",
+            "rhsOperand": "200",
+            "operator": "eq",
+            "status": "pass"
+          },
+          {
+            "uid": "SoOVnZa5zGRl_Z9_PkiJ6",
+            "lhsExpr": "res.body.name",
+            "rhsExpr": "isString",
+            "rhsOperand": "",
+            "operator": "isString",
+            "status": "pass"
+          },
+          {
+            "uid": "BDQ-jVxRCxHvwrnhdwNg8",
+            "lhsExpr": "res.body.website",
+            "rhsExpr": "isString",
+            "rhsOperand": "",
+            "operator": "isString",
+            "status": "pass"
+          }
+        ],
+        "testResults": [],
+        "preRequestTestResults": [],
+        "postResponseTestResults": [],
+        "shouldStopRunnerExecution": false,
+        "runDuration": 0.140533083,
+        "name": "Create User",
+        "path": "06-Collection Runner/Solution/Create User.yml",
+        "iterationIndex": 3
+      },
+      {
+        "test": {
+          "filename": "06-Collection Runner/Solution/Verify Creation.yml"
+        },
+        "request": {
+          "method": "GET",
+          "url": "https://jsonplaceholder.typicode.com/users/4",
+          "headers": {
+            "content-type": null
+          }
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "headers": {
+            "date": "Wed, 18 Feb 2026 05:17:54 GMT",
+            "content-type": "application/json; charset=utf-8",
+            "transfer-encoding": "chunked",
+            "connection": "close",
+            "access-control-allow-credentials": "true",
+            "cache-control": "max-age=4********200",
+            "etag": "W/\"20d-8RgvpSlsXJuYWj1NkFA2Hm1U5TI\"",
+            "expires": "-1",
+            "nel": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":********600,\"success_fraction\":0.01,\"failure_fraction\":0.1}",
+            "pragma": "no-cache",
+            "report-to": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=JYY%2BgF69o6erGImNfRv8FgimB%2Bptzf5aAo6To%2Fq9DRg%********D\\u0026sid=e11707d5-02a7-4********ef-b45e-2cf4d20********6f7d\\u0026ts=1771********8792********\"}],\"max_age\":********600}",
+            "reporting-endpoints": "heroku-nel=\"https://nel.heroku.com/reports?s=JYY%2BgF69o6erGImNfRv8FgimB%2Bptzf5aAo6To%2Fq9DRg%********D&sid=e11707d5-02a7-4********ef-b45e-2cf4d20********6f7d&ts=1771********8792********\"",
+            "server": "cloudflare",
+            "vary": "Origin, Accept-Encoding",
+            "via": "2.0 heroku-router",
+            "x-content-type-options": "nosniff",
+            "x-powered-by": "Express",
+            "x-ratelimit-limit": "1000",
+            "x-ratelimit-remaining": "999",
+            "x-ratelimit-reset": "1771********87971",
+            "age": "********951",
+            "cf-cache-status": "HIT",
+            "cf-ray": "9cfb0f9258e8********8be-ATL",
+            "alt-svc": "h********=\":44********\"; ma=86400"
+          },
+          "data": {
+            "id": 4,
+            "name": "Patricia Lebsack",
+            "username": "Karianne",
+            "email": "Julianne.OConner@kory.org",
+            "address": {
+              "street": "Hoeger Mall",
+              "suite": "Apt. 692",
+              "city": "South Elvis",
+              "zipcode": "5********919-4257",
+              "geo": {
+                "lat": "29.4572",
+                "lng": "-164.2990"
+              }
+            },
+            "phone": "49********-170-962******** x156",
+            "website": "kale.biz",
+            "company": {
+              "name": "Robel-Corkery",
+              "catchPhrase": "Multi-tiered zero tolerance productivity",
+              "bs": "transition cutting-edge web services"
+            }
+          },
+          "url": "https://jsonplaceholder.typicode.com/users/4",
+          "responseTime": 40
+        },
+        "error": null,
+        "status": "pass",
+        "assertionResults": [
+          {
+            "uid": "wtPmH2LI7R-WBzbKpxnEM",
+            "lhsExpr": "res.status",
+            "rhsExpr": "eq 200",
+            "rhsOperand": "200",
+            "operator": "eq",
+            "status": "pass"
+          },
+          {
+            "uid": "P_bF5XbZfsRVAjybJZrrA",
+            "lhsExpr": "res.body",
+            "rhsExpr": "isJson",
+            "rhsOperand": "",
+            "operator": "isJson",
+            "status": "pass"
+          },
+          {
+            "uid": "ITIVj********sd6TIIxmN7voW********G",
+            "lhsExpr": "res.body.id",
+            "rhsExpr": "isNumber",
+            "rhsOperand": "",
+            "operator": "isNumber",
+            "status": "pass"
+          }
+        ],
+        "testResults": [
+          {
+            "description": "User exists and has valid data",
+            "status": "pass",
+            "uid": "mXIXRT5OJR41usAoke-QI"
+          },
+          {
+            "description": "Response time is acceptable",
+            "status": "pass",
+            "uid": "zxxLX096BUvz4z6C9tzPt"
+          }
+        ],
+        "preRequestTestResults": [],
+        "postResponseTestResults": [],
+        "shouldStopRunnerExecution": false,
+        "runDuration": 0.134115,
+        "name": "Verify Creation",
+        "path": "06-Collection Runner/Solution/Verify Creation.yml",
+        "iterationIndex": 3
+      }
+    ],
+    "summary": {
+      "totalRequests": 2,
+      "passedRequests": 2,
+      "failedRequests": 0,
+      "errorRequests": 0,
+      "skippedRequests": 0,
+      "totalAssertions": 6,
+      "passedAssertions": 6,
+      "failedAssertions": 0,
+      "totalTests": 2,
+      "passedTests": 2,
+      "failedTests": 0,
+      "totalPreRequestTests": 0,
+      "passedPreRequestTests": 0,
+      "failedPreRequestTests": 0,
+      "totalPostResponseTests": 0,
+      "passedPostResponseTests": 0,
+      "failedPostResponseTests": 0
+    }
+  },
+  {
+    "iterationIndex": 4,
+    "results": [
+      {
+        "test": {
+          "filename": "06-Collection Runner/Solution/Create User.yml"
+        },
+        "request": {
+          "method": "POST",
+          "url": "https://echo.usebruno.com",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "data": "{\n  \"name\": \"Chelsey Dietrich\",\n  \"website\": \"demarco.info\"\n}"
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "headers": {
+            "server": "nginx/1.18.0 (Ubuntu)",
+            "date": "Wed, 18 Feb 2026 05:17:55 GMT",
+            "content-type": "application/json",
+            "content-length": "61",
+            "connection": "close",
+            "host": "echo.usebruno.com:44********",
+            "x-real-ip": "104.178.200.102",
+            "x-forwarded-for": "104.178.200.102",
+            "x-forwarded-proto": "https",
+            "accept": "application/json, text/plain, */*",
+            "user-agent": "bruno-runtime/********.1.1",
+            "request-start-time": "1771********91875029",
+            "accept-encoding": "gzip, compress, deflate, br",
+            "strict-transport-security": "max-age=6********072000; includeSubdomains",
+            "x-frame-options": "DENY",
+            "x-content-type-options": "nosniff"
+          },
+          "data": {
+            "name": "Chelsey Dietrich",
+            "website": "demarco.info"
+          },
+          "url": "https://echo.usebruno.com/",
+          "responseTime": 218
+        },
+        "error": null,
+        "status": "pass",
+        "assertionResults": [
+          {
+            "uid": "VNERJv_9M17TqmS7qzTn6",
+            "lhsExpr": "res.status",
+            "rhsExpr": "eq 200",
+            "rhsOperand": "200",
+            "operator": "eq",
+            "status": "pass"
+          },
+          {
+            "uid": "fZzRTKeq4tqOM9AoeGRAS",
+            "lhsExpr": "res.body.name",
+            "rhsExpr": "isString",
+            "rhsOperand": "",
+            "operator": "isString",
+            "status": "pass"
+          },
+          {
+            "uid": "MMz2HS0IH0JighrWLLUy4",
+            "lhsExpr": "res.body.website",
+            "rhsExpr": "isString",
+            "rhsOperand": "",
+            "operator": "isString",
+            "status": "pass"
+          }
+        ],
+        "testResults": [],
+        "preRequestTestResults": [],
+        "postResponseTestResults": [],
+        "shouldStopRunnerExecution": false,
+        "runDuration": 0.262632791,
+        "name": "Create User",
+        "path": "06-Collection Runner/Solution/Create User.yml",
+        "iterationIndex": 4
+      },
+      {
+        "test": {
+          "filename": "06-Collection Runner/Solution/Verify Creation.yml"
+        },
+        "request": {
+          "method": "GET",
+          "url": "https://jsonplaceholder.typicode.com/users/5",
+          "headers": {
+            "content-type": null
+          }
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "headers": {
+            "date": "Wed, 18 Feb 2026 05:17:55 GMT",
+            "content-type": "application/json; charset=utf-8",
+            "transfer-encoding": "chunked",
+            "connection": "close",
+            "access-control-allow-credentials": "true",
+            "cache-control": "max-age=4********200",
+            "etag": "W/\"1fb-gmS8Go1GsKpTWscwm+5AFpuro+k\"",
+            "expires": "-1",
+            "nel": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":********600,\"success_fraction\":0.01,\"failure_fraction\":0.1}",
+            "pragma": "no-cache",
+            "report-to": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=PaO1%2BY5rKKydv4ZOlLVYWtJPcKhaPuZBW0rzd5euN7E%********D\\u0026sid=e11707d5-02a7-4********ef-b45e-2cf4d20********6f7d\\u0026ts=1771166892\"}],\"max_age\":********600}",
+            "reporting-endpoints": "heroku-nel=\"https://nel.heroku.com/reports?s=PaO1%2BY5rKKydv4ZOlLVYWtJPcKhaPuZBW0rzd5euN7E%********D&sid=e11707d5-02a7-4********ef-b45e-2cf4d20********6f7d&ts=1771166892\"",
+            "server": "cloudflare",
+            "vary": "Origin, Accept-Encoding",
+            "via": "2.0 heroku-router",
+            "x-content-type-options": "nosniff",
+            "x-powered-by": "Express",
+            "x-ratelimit-limit": "1000",
+            "x-ratelimit-remaining": "994",
+            "x-ratelimit-reset": "1771166897",
+            "age": "22791",
+            "cf-cache-status": "HIT",
+            "cf-ray": "9cfb0f94eb1cb019-ATL",
+            "alt-svc": "h********=\":44********\"; ma=86400"
+          },
+          "data": {
+            "id": 5,
+            "name": "Chelsey Dietrich",
+            "username": "Kamren",
+            "email": "Lucio_Hettinger@annie.ca",
+            "address": {
+              "street": "Skiles Walks",
+              "suite": "Suite ********51",
+              "city": "Roscoeview",
+              "zipcode": "****************26********",
+              "geo": {
+                "lat": "-********1.8129",
+                "lng": "62.5********42"
+              }
+            },
+            "phone": "(254)954-1289",
+            "website": "demarco.info",
+            "company": {
+              "name": "Keebler LLC",
+              "catchPhrase": "User-centric fault-tolerant solution",
+              "bs": "revolutionize end-to-end systems"
+            }
+          },
+          "url": "https://jsonplaceholder.typicode.com/users/5",
+          "responseTime": 44
+        },
+        "error": null,
+        "status": "pass",
+        "assertionResults": [
+          {
+            "uid": "arknGSUfeOHRjMMBgZN-g",
+            "lhsExpr": "res.status",
+            "rhsExpr": "eq 200",
+            "rhsOperand": "200",
+            "operator": "eq",
+            "status": "pass"
+          },
+          {
+            "uid": "m1Bu5BpWGw2-2YQnhXRJI",
+            "lhsExpr": "res.body",
+            "rhsExpr": "isJson",
+            "rhsOperand": "",
+            "operator": "isJson",
+            "status": "pass"
+          },
+          {
+            "uid": "BA84OhX28antka-nXbVBQ",
+            "lhsExpr": "res.body.id",
+            "rhsExpr": "isNumber",
+            "rhsOperand": "",
+            "operator": "isNumber",
+            "status": "pass"
+          }
+        ],
+        "testResults": [
+          {
+            "description": "User exists and has valid data",
+            "status": "pass",
+            "uid": "lpFvGcwb********9Aglzrn0V********Lp"
+          },
+          {
+            "description": "Response time is acceptable",
+            "status": "pass",
+            "uid": "unlUOtVSzKiWGDxAFHd5c"
+          }
+        ],
+        "preRequestTestResults": [],
+        "postResponseTestResults": [],
+        "shouldStopRunnerExecution": false,
+        "runDuration": 0.147015833,
+        "name": "Verify Creation",
+        "path": "06-Collection Runner/Solution/Verify Creation.yml",
+        "iterationIndex": 4
+      }
+    ],
+    "summary": {
+      "totalRequests": 2,
+      "passedRequests": 2,
+      "failedRequests": 0,
+      "errorRequests": 0,
+      "skippedRequests": 0,
+      "totalAssertions": 6,
+      "passedAssertions": 6,
+      "failedAssertions": 0,
+      "totalTests": 2,
+      "passedTests": 2,
+      "failedTests": 0,
+      "totalPreRequestTests": 0,
+      "passedPreRequestTests": 0,
+      "failedPreRequestTests": 0,
+      "totalPostResponseTests": 0,
+      "passedPostResponseTests": 0,
+      "failedPostResponseTests": 0
+    }
+  }
+]

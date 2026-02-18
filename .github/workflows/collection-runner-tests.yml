@@ -1,0 +1,44 @@
+name: Collection Runner Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Bruno CLI
+        run: npm install -g @usebruno/cli
+
+      - name: Run Collection Runner Tests
+        working-directory: collections/Bruno Live Workshop
+        run: |
+          bru run "06-Collection Runner/Solution" \
+            --env Workshop \
+            --output results.json \
+            --reporter-json results.json \
+            --reporter-html results.html \
+            --json-file-path ../../users.json
+
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bruno-test-results
+          path: |
+            collections/Bruno Live Workshop/results.json
+            collections/Bruno Live Workshop/results.html
+
