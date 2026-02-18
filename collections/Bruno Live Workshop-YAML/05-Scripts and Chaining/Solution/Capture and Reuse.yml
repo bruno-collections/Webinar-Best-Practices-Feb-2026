@@ -1,48 +1,64 @@
 info:
-  name: Capture and Reuse
+  name: Parse Nested Data
   type: http
   seq: 2
 
 http:
-  method: POST
-  url: "{{baseUrl}}/posts"
-  body:
-    type: json
-    data: |-
-      {
-        "title": "Created by Bruno",
-        "body": "This post was created during the workshop to demonstrate variable chaining.",
-        "userId": {{defaultUserId}}
-      }
+  method: GET
+  url: "{{baseUrl}}/users/{{defaultUserId}}"
 
 runtime:
   scripts:
     - type: after-response
       code: |-
-        // Capture the ID returned by the API
-        const body = res.getBody();
+        const user = res.getBody();
 
-        if (body && body.id) {
-          bru.setVar("capturedPostId", body.id);
-          bru.setVar("capturedPostTitle", body.title);
-          console.log("✅ Captured post ID:", body.id);
-          console.log("✅ Captured title:", body.title);
+        // Extract and transform nested data
+        if (user) {
+          // Store basic user info
+          bru.setVar("userId", user.id);
+          bru.setVar("userName", user.name);
+          bru.setVar("userEmail", user.email);
+
+          // Parse and extract address components
+          if (user.address) {
+            const fullAddress = `${user.address.street}, ${user.address.city}`;
+            bru.setVar("userAddress", fullAddress);
+            bru.setVar("userCity", user.address.city);
+
+            // Extract coordinates
+            if (user.address.geo) {
+              bru.setVar("userLat", user.address.geo.lat);
+              bru.setVar("userLng", user.address.geo.lng);
+            }
+          }
+
+          // Parse company info
+          if (user.company) {
+            bru.setVar("companyName", user.company.name);
+          }
+
+          console.log("✅ Extracted user data:");
+          console.log("   Name:", user.name);
+          console.log("   City:", user.address?.city);
+          console.log("   Company:", user.company?.name);
         }
     - type: tests
       code: |-
-        test("Post was created successfully", () => {
-          expect(res.status).to.equal(201);
-          expect(res.getBody()).to.have.property("id");
+        test("User data is complete", () => {
+          const user = res.getBody();
+          expect(user).to.have.property("id");
+          expect(user).to.have.property("address");
+          expect(user.address).to.have.property("geo");
         });
   assertions:
     - expression: res.status
       operator: eq
-      value: "201"
+      value: "200"
     - expression: res.body.id
       operator: isNumber
-    - expression: res.body.title
-      operator: eq
-      value: Created by Bruno
+    - expression: res.body.address
+      operator: isDefined
 
 settings:
   encodeUrl: true
@@ -51,15 +67,19 @@ settings:
   maxRedirects: 5
 
 docs: |-
-  # Capture and Reuse 🔗
+  # Parse Nested Data 🔍
 
-  This request creates a new post and **captures the returned ID** using a post-response script.
+  This request demonstrates how to **extract and transform complex nested JSON** from API responses.
 
-  **The key line:**
-  ```javascript
-  bru.setVar("capturedPostId", body.id);
-  ```
+  **What this script does:**
+  1. Extracts basic user properties (id, name, email)
+  2. Parses nested address object and creates a formatted address string
+  3. Extracts geo coordinates from deeply nested structure
+  4. Stores company information
 
-  This stores the post ID as a **runtime variable** that persists across requests in this session.
+  **Key techniques:**
+  - Using optional chaining (`user.address?.city`) to safely access nested properties
+  - Combining multiple fields into formatted strings
+  - Storing multiple variables from a single response
 
-  **Send this request first**, then open **Use Captured Data** to see the chaining in action!
+  Check the **Timeline** tab to see all the extracted values!

@@ -1,7 +1,7 @@
 info:
   name: Hello Echo
   type: http
-  seq: 3
+  seq: 4
 
 http:
   method: POST
@@ -10,8 +10,8 @@ http:
     type: json
     data: |-
       {
-        "message": "Hello from Bruno!",
-        "workshop": "Live Workshop"
+        "message": "",
+        "workshop": ""
       }
 
 settings:

@@ -1,5 +1,5 @@
 info:
-  name: Pre-Request Scripting
+  name: Generate Test Data
   type: http
   seq: 1
 
@@ -10,30 +10,46 @@ http:
     type: json
     data: |-
       {
-        "generatedAt": "{{timestamp}}",
-        "daysAgo": "{{pastDate}}",
-        "requestId": "{{requestId}}"
+        "user": {
+          "email": "{{userEmail}}",
+          "username": "{{username}}",
+          "registeredAt": "{{registrationDate}}"
+        },
+        "metadata": {
+          "requestId": "{{requestId}}",
+          "timestamp": "{{timestamp}}"
+        }
       }
 
 runtime:
   scripts:
     - type: before-request
       code: |-
-        // Generate a timestamp
+        // Generate realistic test data
+        const firstNames = ["Alice", "Bob", "Charlie", "Diana", "Eve"];
+        const lastNames = ["Smith", "Johnson", "Williams", "Brown", "Davis"];
+
+        const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+        const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+        const username = `${firstName.toLowerCase()}.${lastName.toLowerCase()}`;
+        const email = `${username}@example.com`;
+
+        bru.setVar("username", username);
+        bru.setVar("userEmail", email);
+
+        // Generate timestamp and registration date
         const now = new Date();
         bru.setVar("timestamp", now.toISOString());
 
-        // Calculate a date 7 days ago
-        const past = new Date(now);
-        past.setDate(past.getDate() - 7);
-        bru.setVar("pastDate", past.toISOString().split("T")[0]);
+        const regDate = new Date(now);
+        regDate.setDate(regDate.getDate() - Math.floor(Math.random() * 365));
+        bru.setVar("registrationDate", regDate.toISOString());
 
-        // Generate a unique request ID
-        const id = `req_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`;
-        bru.setVar("requestId", id);
+        // Generate unique request ID
+        const requestId = `req_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
+        bru.setVar("requestId", requestId);
 
-        console.log("📝 Generated request ID:", id);
-        console.log("📅 Past date:", past.toISOString().split("T")[0]);
+        console.log("🎲 Generated user:", username, email);
   assertions:
     - expression: res.status
       operator: eq
@@ -46,16 +62,19 @@ settings:
   maxRedirects: 5
 
 docs: |-
-  # Pre-Request Scripting ⚡
+  # Generate Test Data 🎲
 
-  The `script:pre-request {}` block runs JavaScript **before** the request is sent.
+  This request demonstrates how to **generate realistic test data** dynamically using pre-request scripts.
 
-  **This script:**
-  1. Generates a current ISO timestamp
-  2. Calculates a date 7 days in the past
-  3. Creates a unique request ID
-  4. Stores all values with `bru.setVar()` for use in the request body
+  **What this script does:**
+  1. Randomly selects first and last names from arrays
+  2. Generates a username and email from the names
+  3. Creates a random registration date within the past year
+  4. Generates a unique request ID with timestamp
 
-  **Send the request** and see the echo response — all the generated values will appear in the body!
+  **Try it:**
+  - Send the request multiple times
+  - Notice how the data changes each time
+  - Check the **Timeline** tab to see the console output
 
-  Check the **Timeline** tab to see the `console.log()` output.
+  This pattern is perfect for load testing or creating varied test scenarios!

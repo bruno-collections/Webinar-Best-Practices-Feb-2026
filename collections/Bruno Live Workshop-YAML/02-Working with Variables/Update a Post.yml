@@ -13,7 +13,7 @@ http:
         "id": 1,
         "title": "Updated from Bruno Workshop",
         "body": "This post was updated during the live workshop!",
-        "userId": {{process.env.processUserId}}
+        "userId": {{}}
       }
 
 settings:

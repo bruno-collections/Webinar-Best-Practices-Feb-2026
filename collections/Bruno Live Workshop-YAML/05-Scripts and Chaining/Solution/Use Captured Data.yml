@@ -1,37 +1,61 @@
 info:
-  name: Use Captured Data
+  name: Transform Array Data
   type: http
   seq: 3
 
 http:
   method: GET
-  url: "{{baseUrl}}/posts/{{capturedPostId}}"
+  url: "{{baseUrl}}/posts?userId={{defaultUserId}}"
 
 runtime:
   scripts:
-    - type: before-request
+    - type: after-response
       code: |-
-        const postId = bru.getVar("capturedPostId");
+        const posts = res.getBody();
 
-        if (!postId) {
-          console.warn("⚠️ No captured post ID found! Run 'Capture and Reuse' first.");
-        } else {
-          console.log("🔗 Using captured post ID:", postId);
+        if (Array.isArray(posts) && posts.length > 0) {
+          // Count total posts
+          bru.setVar("totalPosts", posts.length);
+
+          // Extract all post IDs
+          const postIds = posts.map(post => post.id);
+          bru.setVar("allPostIds", JSON.stringify(postIds));
+
+          // Get first and last post IDs
+          bru.setVar("firstPostId", posts[0].id);
+          bru.setVar("lastPostId", posts[posts.length - 1].id);
+
+          // Calculate average title length
+          const avgTitleLength = Math.round(
+            posts.reduce((sum, post) => sum + post.title.length, 0) / posts.length
+          );
+          bru.setVar("avgTitleLength", avgTitleLength);
+
+          // Find longest post title
+          const longestPost = posts.reduce((longest, post) =>
+            post.title.length > longest.title.length ? post : longest
+          );
+          bru.setVar("longestPostTitle", longestPost.title);
+
+          console.log("📊 Array Analysis:");
+          console.log("   Total posts:", posts.length);
+          console.log("   Avg title length:", avgTitleLength);
+          console.log("   Longest title:", longestPost.title);
         }
     - type: tests
       code: |-
-        test("Retrieved a valid post", () => {
-          const body = res.getBody();
-          expect(body).to.have.property("id");
-          expect(body).to.have.property("title");
-          expect(body).to.have.property("body");
+        test("Posts array is valid", () => {
+          const posts = res.getBody();
+          expect(posts).to.be.an("array");
+          expect(posts.length).to.be.greaterThan(0);
+          expect(posts[0]).to.have.property("title");
         });
   assertions:
     - expression: res.status
       operator: eq
       value: "200"
-    - expression: res.body.id
-      operator: isNumber
+    - expression: res.body
+      operator: isArray
 
 settings:
   encodeUrl: true
@@ -40,14 +64,20 @@ settings:
   maxRedirects: 5
 
 docs: |-
-  # Use Captured Data 🔗
+  # Transform Array Data 📊
 
-  This request uses `{{capturedPostId}}` — a runtime variable set by the previous request.
+  This request demonstrates how to **process arrays and calculate aggregate values** from API responses.
 
-  **Variable chaining flow:**
-  1. **Capture and Reuse** → creates a post → saves the ID with `bru.setVar("capturedPostId", body.id)`
-  2. **Use Captured Data** → reads it via `{{capturedPostId}}` in the URL
+  **What this script does:**
+  1. Counts total number of posts
+  2. Extracts all post IDs into an array using `map()`
+  3. Gets first and last post IDs
+  4. Calculates average title length using `reduce()`
+  5. Finds the post with the longest title
 
-  ⚠️ **Run "Capture and Reuse" first!** Otherwise the variable won't exist yet.
+  **Key techniques:**
+  - Array methods: `map()`, `reduce()`, `filter()`
+  - Aggregate calculations (count, average, min/max)
+  - Storing both individual values and JSON arrays
 
-  This pattern is essential for testing API workflows where one request depends on another's output.
+  Check the **Timeline** tab to see the analysis results!
