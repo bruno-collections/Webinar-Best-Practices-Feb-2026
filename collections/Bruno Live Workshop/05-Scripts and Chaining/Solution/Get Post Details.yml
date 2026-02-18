@@ -1,0 +1,56 @@
+info:
+  name: Get Post Details
+  type: http
+  seq: 4
+
+http:
+  method: GET
+  url: "{{baseUrl}}/posts/{{capturedPostId}}"
+
+runtime:
+  scripts:
+    - type: before-request
+      code: |-
+        // Run "Update Post" first to capture the post ID
+        const createResponse = await bru.runRequest("05-Scripts and Chaining/Solution/Update Post");
+        console.log("🔗 Ran 'Create Post', status:", createResponse.status);
+
+        const postId = createResponse.data.id;
+        console.log("🔗 Using captured post ID:", postId);
+    - type: tests
+      code: |-
+        test("Post was retrieved successfully", () => {
+          expect(res.status).to.equal(200);
+        });
+
+        test("Post has expected structure", () => {
+          const body = res.getBody();
+          expect(body).to.have.property("id");
+          expect(body).to.have.property("title");
+          expect(body).to.have.property("body");
+          expect(body).to.have.property("userId");
+        });
+  assertions:
+    - expression: res.status
+      operator: eq
+      value: "200"
+    - expression: res.body.id
+      operator: isNumber
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  # Get Post Details 🔍
+
+  This request uses `bru.runRequest()` to automatically run **Create Post** first, then retrieves the created post.
+
+  **How the chain works:**
+  1. Pre-request script calls `bru.runRequest("05-Scripts and Chaining/Solution/Create Post")`
+  2. **Create Post** runs → creates a post → saves ID with `bru.setVar("capturedPostId", body.id)`
+  3. Back in **Get Post Details** → uses `{{capturedPostId}}` in the URL to fetch that post
+
+  This is fully self-contained — just send this request and the entire chain runs automatically!

@@ -1,0 +1,24 @@
+name: Workshop
+variables:
+  - name: baseUrl
+    value: https://jsonplaceholder.typicode.com
+  - name: echoUrl
+    value: https://echo.usebruno.com
+  - name: dogApiUrl
+    value: https://dogapi.dog/api/v2
+  - name: httpFakerUrl
+    value: https://www.httpfaker.org
+  - name: defaultUserId
+    value: "1"
+  - name: appName
+    value: Bruno Live Workshop
+  - name: authUsername
+    value: admin
+  - name: authPassword
+    value: password
+  - name: oauthClientId
+    value: demo-client-id
+  - name: oauthClientSecret
+    value: demo-client-secret
+  - name: postId
+    value: "5"

@@ -1,0 +1,53 @@
+info:
+  name: Full Test Suite (JS File)
+  type: http
+  seq: 4
+
+http:
+  method: GET
+  url: "{{baseUrl}}/users"
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        const { runUserTests } = require("./04-Tests and Assertions/Solution/userTests.js");
+
+        runUserTests(res);
+  assertions:
+    - expression: res.status
+      operator: eq
+      value: "200"
+    - expression: res.body[0]
+      operator: isJson
+    - expression: res.body
+      operator: isArray
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  # Full Test Suite (JS File) 📁
+
+  This request runs the **exact same tests** as "Full Test Suite" — but all the logic lives in `userTests.js`.
+
+  **The script tab is just 2 lines:**
+  ```javascript
+  const { runUserTests } = require("./userTests");
+  runUserTests(res);
+  ```
+
+  **What `userTests.js` consolidates:**
+  - ✅ Chai.js tests (status, array check, core fields)
+  - ✅ Zod schema validation (full user object structure)
+  - ✅ `UserSchema` export for reuse in other requests
+
+  **Why use JS files?**
+  - **Reusable** — import the same tests across multiple requests
+  - **Clean** — request files stay minimal
+  - **Maintainable** — update the schema once, applies everywhere
+
+  **Compare:** Open "Full Test Suite" side-by-side to see the difference between inline and externalized tests.

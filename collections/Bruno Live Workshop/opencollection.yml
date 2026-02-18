@@ -1,0 +1,73 @@
+opencollection: 1.0.0
+
+info:
+  name: Bruno Live Workshop
+  
+
+request:
+  scripts:
+    - type: before-request
+      code: |-
+        // Collection-level pre-request script
+        // This runs before EVERY request in the collection
+        console.log(`🚀 Sending: ${req.getName()}`);
+
+docs:
+  content: |-
+    # 🎉 Welcome to the Bruno Live Workshop!
+
+    This collection is designed for a hands-on walkthrough of Bruno's key features.
+
+    ## 📋 Sections
+
+    1. **Getting Started** — Your first API requests
+    2. **Working with Variables** — POST/PUT, environments, dynamic variables
+    3. **Tests & Assertions** — Validate API responses
+    4. **Scripts & Chaining** — Automate workflows with JavaScript
+    5. **Collection Runner** — Batch testing with data files
+
+    ## 🏁 Before You Start
+
+    1. Select the **Workshop** environment from the environment dropdown
+    2. Work through the sections in order (01 → 05)
+    3. Each folder has instructions in the **Docs** tab
+
+    ## 💻 Bruno CLI Quick Reference
+
+    Bruno also has a CLI for running collections from the terminal or CI/CD pipelines.
+
+    **Run this entire collection:**
+    ```bash
+    bru run --env Workshop
+    ```
+
+    **Run a specific folder:**
+    ```bash
+    bru run "03-Tests and Assertions" --env Workshop
+    ```
+
+    **Run with a data file + generate reports:**
+    ```bash
+    bru run "05-Collection Runner" --env Workshop --csv-file-path data-files/new-users.csv --reporter-html reports/report.html
+    ```
+
+    **Stop on first failure:**
+    ```bash
+    bru run --env Workshop --bail
+    ```
+
+    See Sections 3 and 5 for more CLI examples.
+
+    ## 🔗 Useful Links
+    - [Bruno Documentation](https://docs.usebruno.com/)
+    - [Bruno Blog](https://blog.usebruno.com/)
+    - [Bruno CLI Docs](https://docs.usebruno.com/bru-cli/overview)
+
+    Happy testing! 🐾
+  type: text/markdown
+bundled: false
+extensions:
+  bruno:
+    ignore:
+      - node_modules
+      - .git

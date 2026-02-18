@@ -1,0 +1,35 @@
+info:
+  name: Dynamically Set Requests
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{echoUrl}}"
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: before-request
+      code: |-
+        req.setBody({
+          "title": "Bruno Starter Guide",
+          "id": "07"
+        })
+
+        req.setHeaders("Content-Type: application/json")
+
+        req.setMethod("POST")
+    - type: after-response
+      code: |-
+        //Log response body
+        console.log(res.body);
+
+        //Log the response status
+        console.log(res.status);
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

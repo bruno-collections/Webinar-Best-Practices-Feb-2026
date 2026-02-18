@@ -1,0 +1,54 @@
+info:
+  name: Visualize Response
+  type: http
+  seq: 5
+
+http:
+  method: GET
+  url: "{{baseUrl}}/users"
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        const users = res.getBody();
+
+        // Define columns for the table
+        const columnDefinitions = [
+          { field: "id", filter: true, width: 80 },
+          { field: "name", filter: true, floatingFilter: true },
+          { field: "email", filter: true, floatingFilter: true },
+          { field: "phone", filter: true },
+          { field: "website", filter: true }
+        ];
+
+        // Render an interactive table with ag-grid, uncomment the below
+
+        // bru.visualize("table", {
+        //   name: "Users Directory",
+        //   provider: "ag-grid",
+        //   props: { rowData: users, columnDefinitions }
+        // });
+
+        // console.log("📊 Visualized", users.length, "users in table");
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  # Visualize Response 📊
+
+  This request fetches all users and displays them in an **interactive table** using `bru.visualize()`.
+
+  **How it works:**
+  1. GET request fetches user data from JSONPlaceholder
+  2. Post-response script defines column definitions
+  3. `bru.visualize("table", ...)` renders a sortable, filterable table
+
+  **Try it:**
+  - Send the request, then switch to the **Visualize** tab to see the table
+  - Use the column filters to search by name or email
+  - Click column headers to sort
