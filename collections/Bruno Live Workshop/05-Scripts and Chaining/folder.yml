@@ -7,279 +7,80 @@ request: {}
 
 docs:
   content: |-
-    # ⚡ Section 5: Scripts and Data Transformation
+    # ⚡ Section 5: Scripts and Chaining
 
-    Scripts let you run JavaScript **before** and **after** requests — enabling powerful data manipulation and automation workflows.
+    Scripts let you run JavaScript **before** and **after** requests — enabling powerful data manipulation, request chaining, and visualization.
 
     In this section, you will:
 
-    - ✅ Generate realistic test data dynamically
-    - ✅ Parse and transform complex JSON responses
-    - ✅ Extract nested data and store multiple values
-    - ✅ Validate response structure and business logic
+    - ✅ Dynamically modify requests using pre-request scripts
+    - ✅ Generate realistic test data with `bru.setVar()`
+    - ✅ Chain requests together with `bru.runRequest()`
+    - ✅ Visualize response data with `bru.visualize()`
+
+    📌 Make sure the **Workshop** environment is selected from the dropdown (top right).
 
     ---
 
-    ### 🎲 Step 1: Create "Generate Test Data"
-
-    Learn to generate realistic fake data for testing APIs.
-
-    1. Right-click on the `05-Scripts and Chaining` folder → **New Request**
-    2. Name it `Generate Test Data`
-    3. Set the method to **POST**
-    4. Set the URL to: `{{echoUrl}}`
-    5. Go to **Body** → **JSON** and paste:
-
-    ```json
-    {
-      "user": {
-        "email": "{{userEmail}}",
-        "username": "{{username}}",
-        "registeredAt": "{{registrationDate}}"
-      },
-      "metadata": {
-        "requestId": "{{requestId}}",
-        "timestamp": "{{timestamp}}"
-      }
-    }
-    ```
-
-    6. Go to the **Script** tab → **Pre Request** and paste:
-
-    ```javascript
-    // Generate realistic test data
-    const firstNames = ["Alice", "Bob", "Charlie", "Diana", "Eve"];
-    const lastNames = ["Smith", "Johnson", "Williams", "Brown", "Davis"];
-
-    const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
-    const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
-    const username = `${firstName.toLowerCase()}.${lastName.toLowerCase()}`;
-    const email = `${username}@example.com`;
-
-    bru.setVar("username", username);
-    bru.setVar("userEmail", email);
-
-    // Generate timestamp and registration date
-    const now = new Date();
-    bru.setVar("timestamp", now.toISOString());
-
-    const regDate = new Date(now);
-    regDate.setDate(regDate.getDate() - Math.floor(Math.random() * 365));
-    bru.setVar("registrationDate", regDate.toISOString());
-
-    // Generate unique request ID
-    const requestId = `req_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
-    bru.setVar("requestId", requestId);
-
-    console.log("🎲 Generated user:", username, email);
-    ```
-
-    7. Click **Send** ▶️ — see the dynamically generated test data!
-    8. Send it again — notice the data changes each time
+    ### 📋 Requests in This Section
 
     ---
 
-    ### 🔍 Step 2: Create "Parse Nested Data"
-
-    Learn to extract and transform complex nested JSON responses.
-
-    1. Create a new request named `Parse Nested Data`
-    2. Set the method to **GET**
-    3. Set the URL to: `{{baseUrl}}/users/{{defaultUserId}}`
-    4. Go to the **Script** tab → **Post Response** and paste:
-
-    ```javascript
-    const user = res.getBody();
-
-    // Extract and transform nested data
-    if (user) {
-      // Store basic user info
-      bru.setVar("userId", user.id);
-      bru.setVar("userName", user.name);
-      bru.setVar("userEmail", user.email);
-
-      // Parse and extract address components
-      if (user.address) {
-        const fullAddress = `${user.address.street}, ${user.address.city}`;
-        bru.setVar("userAddress", fullAddress);
-        bru.setVar("userCity", user.address.city);
-
-        // Extract coordinates
-        if (user.address.geo) {
-          bru.setVar("userLat", user.address.geo.lat);
-          bru.setVar("userLng", user.address.geo.lng);
-        }
-      }
-
-      // Parse company info
-      if (user.company) {
-        bru.setVar("companyName", user.company.name);
-      }
-
-      console.log("✅ Extracted user data:");
-      console.log("   Name:", user.name);
-      console.log("   City:", user.address?.city);
-      console.log("   Company:", user.company?.name);
-    }
-    ```
-
-    5. Go to the **Tests** tab and paste:
-
-    ```javascript
-    test("User data is complete", () => {
-      const user = res.getBody();
-      expect(user).to.have.property("id");
-      expect(user).to.have.property("address");
-      expect(user.address).to.have.property("geo");
-    });
-    ```
-
-    6. Click **Send** ▶️ — the script extracts and stores multiple nested values!
+    **🔹 Dynamically Set Requests** — Modify a request on the fly with scripts
+    - A pre-request script uses `req.setBody()`, `req.setHeaders()`, and `req.setMethod()` to transform the request before it sends
+    - 🎯 **Your task:** The body values, Content-Type header, and `console.log()` statements are **empty** — fill them in
+    - 💡 **Hint:** The script changes a GET into a POST with a JSON body — what Content-Type does JSON use?
 
     ---
 
-    ### 📊 Step 3: Create "Transform Array Data"
-
-    Learn to process arrays and calculate aggregate values.
-
-    1. Create a new request named `Transform Array Data`
-    2. Set the method to **GET**
-    3. Set the URL to: `{{baseUrl}}/posts?userId={{defaultUserId}}`
-    4. Go to the **Script** tab → **Post Response** and paste:
-
-    ```javascript
-    const posts = res.getBody();
-
-    if (Array.isArray(posts) && posts.length > 0) {
-      // Count total posts
-      bru.setVar("totalPosts", posts.length);
-
-      // Extract all post IDs
-      const postIds = posts.map(post => post.id);
-      bru.setVar("allPostIds", JSON.stringify(postIds));
-
-      // Get first and last post IDs
-      bru.setVar("firstPostId", posts[0].id);
-      bru.setVar("lastPostId", posts[posts.length - 1].id);
-
-      // Calculate average title length
-      const avgTitleLength = Math.round(
-        posts.reduce((sum, post) => sum + post.title.length, 0) / posts.length
-      );
-      bru.setVar("avgTitleLength", avgTitleLength);
-
-      // Find longest post title
-      const longestPost = posts.reduce((longest, post) =>
-        post.title.length > longest.title.length ? post : longest
-      );
-      bru.setVar("longestPostTitle", longestPost.title);
-
-      console.log("📊 Array Analysis:");
-      console.log("   Total posts:", posts.length);
-      console.log("   Avg title length:", avgTitleLength);
-      console.log("   Longest title:", longestPost.title);
-    }
-    ```
-
-    5. Go to the **Tests** tab and paste:
-
-    ```javascript
-    test("Posts array is valid", () => {
-      const posts = res.getBody();
-      expect(posts).to.be.an("array");
-      expect(posts.length).to.be.greaterThan(0);
-      expect(posts[0]).to.have.property("title");
-    });
-    ```
-
-    6. Click **Send** ▶️ — see the array transformation and calculations!
+    **🔹 Generate Test Data** — Create realistic fake data in pre-request scripts
+    - Generates random usernames, emails, timestamps, and request IDs using `bru.setVar()` to populate the request body
+    - 🎯 **Your task:** The `firstNames` and `lastNames` arrays are **empty** — add some names. The `bru.setVar()` calls and `console.log()` are also **missing values**
+    - 💡 **Hint:** Look at how `username` and `email` are derived from the name arrays
+    - **Try it:** Send multiple times — data changes with every request!
 
     ---
 
-    ### 🔗 Step 4: Create "Create Post" and "Get Post Details"
-
-    Learn to chain requests together using `bru.runRequest()` — one request runs another and uses its captured data.
-
-    **Part A — Create "Create Post":**
-
-    1. Create a new request named `Create Post`
-    2. Set the method to **POST**
-    3. Set the URL to: `{{baseUrl}}/posts`
-    4. Go to **Body** → **JSON** and paste:
-
-    ```json
-    {
-      "title": "Created by Bruno",
-      "body": "This post was created during the workshop to demonstrate request chaining.",
-      "userId": {{defaultUserId}}
-    }
-    ```
-
-    5. Go to the **Script** tab → **Post Response** and paste:
-
-    ```javascript
-    const body = res.getBody();
-
-    if (body && body.id) {
-      bru.setVar("capturedPostId", body.id);
-      console.log("✅ Captured post ID:", body.id);
-      console.log("✅ Captured title:", body.title);
-    }
-    ```
-
-    6. Click **Send** ▶️ — the post is created and the ID is captured!
+    **🔹 Update Post** — Captures a post ID for use in chaining
+    - Sends a PUT request to update a post and captures the returned ID with `bru.setVar("capturedPostId", ...)`
+    - ✅ This request is mostly complete — send it and check the **Timeline** tab to see the captured values
+    - This is the "first step" in the request chain used by **Get Post Details**
 
     ---
 
-    **Part B — Create "Get Post Details":**
-
-    This request uses `bru.runRequest()` to run **Create Post** automatically, then fetches the created post.
-
-    1. Create a new request named `Get Post Details`
-    2. Set the method to **GET**
-    3. Set the URL to: `{{baseUrl}}/posts/{{capturedPostId}}`
-    4. Go to the **Script** tab → **Pre Request** and paste:
-
-    ```javascript
-    // Run "Create Post" first to capture the post ID
-    const createResponse = await bru.runRequest("05-Scripts and Chaining/Solution/Create Post");
-    console.log("🔗 Ran 'Create Post', status:", createResponse.status);
-
-    const postId = bru.getVar("capturedPostId");
-    console.log("🔗 Using captured post ID:", postId);
-    ```
-
-    5. Go to the **Tests** tab and paste:
-
-    ```javascript
-    test("Post was retrieved successfully", () => {
-      expect(res.status).to.equal(200);
-    });
-
-    test("Post has expected structure", () => {
-      const body = res.getBody();
-      expect(body).to.have.property("id");
-      expect(body).to.have.property("title");
-      expect(body).to.have.property("body");
-      expect(body).to.have.property("userId");
-    });
-    ```
-
-    6. Click **Send** ▶️ — the entire chain runs automatically! Create Post runs first, then Get Post Details fetches the result.
-
-    💡 **Key concept:** `bru.runRequest("05-Scripts and Chaining/Solution/Create Post")` executes the other request (including its scripts), so the `capturedPostId` variable is set before this request's URL is resolved. The path is relative to the collection root.
+    **🔹 Get Post Details** — Request chaining with `bru.runRequest()`
+    - Uses a pre-request script to run **Update Post** first, then fetches the post using the captured ID
+    - 🎯 **Your task:** The `bru.runRequest()` path is **incomplete** — fill in the correct path to the Update Post request
+    - 🎯 **Your task:** The response logging values are **empty** — fill in the correct properties from the response
+    - 💡 **Hint:** `bru.runRequest()` paths are relative to the **collection root** (e.g., `"folder/subfolder/Request Name"`)
 
     ---
 
-    ### 📌 Summary
+    **🔹 Visualize Response** — Interactive data visualization
+    - Fetches all users and renders them as a sortable, filterable table using `bru.visualize()`
+    - 🎯 **Your task:** The `bru.visualize()` call and `console.log()` are **commented out** — uncomment them
+    - **Try it:** Send the request, then switch to the **Visualize** tab to see the interactive table
 
-    In this section, you learned how to:
+    ---
 
-    - ✅ Generate realistic test data with randomization
-    - ✅ Extract and transform nested JSON structures
-    - ✅ Process arrays and calculate aggregate values
-    - ✅ Chain requests using `bru.runRequest()` to orchestrate workflows
-    - ✅ Pass data between requests with `bru.setVar()` / `bru.getVar()`
+    ### 📁 Solution Folder
 
-    📁 Check the **Solution** folder to see the completed requests.
+    The **Solution** subfolder contains fully working versions of all requests.
+
+    **Solution requests:**
+    - ✅ **Dynamically Set Requests** — complete with body values, headers, and logging
+    - ✅ **Generate Test Data** (Pre-Request Scripting) — complete with name arrays and variable assignments
+    - ✅ **Update Post** — captures post ID for chaining
+    - ✅ **Get Post Details** — full request chain with `bru.runRequest()`
+    - ✅ **Visualize Response** — active `bru.visualize()` with ag-grid table
+
+    ---
+
+    ### 📌 Key Concepts
+
+    - **Pre-request scripts** — run JavaScript before the request sends (`req.setBody()`, `req.setMethod()`, `req.setHeaders()`)
+    - **Post-response scripts** — run JavaScript after the response (`bru.setVar()`, `console.log()`)
+    - **`bru.runRequest()`** — execute another request from within a script (path is relative to collection root)
+    - **`bru.setVar()` / `bru.getVar()`** — pass data between requests via runtime variables
+    - **`bru.visualize()`** — render response data as interactive tables or charts in the Visualize tab
   type: text/markdown

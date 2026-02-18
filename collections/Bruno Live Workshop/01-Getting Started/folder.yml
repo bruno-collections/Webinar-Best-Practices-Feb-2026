@@ -13,73 +13,60 @@ docs:
 
     In this section, you will:
 
-    - ✅ Create your first API request
     - ✅ Send a POST request to Bruno's echo server
     - ✅ Send GET requests to public APIs
     - ✅ Explore JSON responses
+    - ✅ Learn about environment variables in URLs
 
     ### 📌 Prerequisites
 
     - Bruno is installed and running
     - You have opened this collection in Bruno
-    - You have selected the **Workshop** environment from the dropdown
+    - Select the **Workshop** environment from the environment dropdown (top right)
 
     ---
 
-    ### 🌐 Step 1: Create "Hello Echo"
+    ### 📋 Requests in This Section
 
-    1. Right-click on the `01-Getting Started` folder
-    2. Select **New Request**
-    3. Name it `Hello Echo`
-    4. Set the method to **POST**
-    5. Set the URL to: `{{echoUrl}}`
-    6. Go to the **Body** tab → select **JSON**
-    7. Paste the following JSON body:
-
-    ```json
-    {
-      "message": "Hello from Bruno!",
-      "workshop": "Live Workshop"
-    }
-    ```
-
-    8. Click **Send** ▶️
-    9. The echo server mirrors back whatever you send — check the response!
+    Each request below is **intentionally incomplete** — follow along with the instructor to fix them!
 
     ---
 
-    ### 🐕 Step 2: Create "Get Dog Facts"
-
-    1. Right-click on the `01-Getting Started` folder → **New Request**
-    2. Name it `Get Dog Facts`
-    3. Set the method to **GET**
-    4. Set the URL to: `{{dogApiUrl}}/facts`
-    5. Click **Send** ▶️
-    6. Explore the response — each fact has an `id`, `type`, and `attributes.body`
+    **🔹 Hello Echo** — POST to Bruno's echo server
+    - The echo server mirrors back whatever JSON you send it
+    - 🎯 **Your task:** The JSON body has empty values — fill them in with something meaningful and click **Send** ▶️
+    - Explore the response to see how the echo server works
 
     ---
 
-    ### 👥 Step 3: Create "Get All Users"
-
-    1. Right-click on the `01-Getting Started` folder → **New Request**
-    2. Name it `Get All Users`
-    3. Set the method to **GET**
-    4. Set the URL to: `{{baseUrl}}/users`
-    5. Click **Send** ▶️
-    6. You'll get an array of 10 users with `name`, `email`, `address`, `company`, etc.
-
-    💡 **Notice** the `{{baseUrl}}` in the URL — this is an **environment variable**! We'll explore these in the next section.
+    **🔹 Get Dog Facts** — GET request to a public API
+    - This request fetches a random dog fact from the Dog API
+    - ✅ This one is ready to go — just click **Send** ▶️ and explore the response
+    - Notice the structured JSON response with `id`, `type`, and `attributes.body`
 
     ---
 
-    ### 📌 Summary
+    **🔹 Get All Users** — GET request to JSONPlaceholder
+    - Fetches all users from the JSONPlaceholder API
+    - 🎯 **Your task:** Look at the URL — something could be improved here. Can you spot what should use an **environment variable** instead?
+    - 💡 **Hint:** Compare this URL to the one in "Get Dog Facts" — how does that request reference its base URL?
 
-    In this section, you learned how to:
+    ---
 
-    - ✅ Create new requests in Bruno
-    - ✅ Send POST requests with JSON bodies
-    - ✅ Send GET requests to public APIs
-    - ✅ Read and explore API responses
+    ### 📁 Solution Folder
 
-    📁 Check the **Solution** folder to see the completed requests.
+    The **Solution** subfolder contains fully working versions of all requests. If you get stuck, open them as a reference!
+
+    **Solution requests:**
+    - ✅ **Hello Echo** — complete with filled-in JSON body
+    - ✅ **Get Dog Facts** — complete and working
+    - ✅ **Get All Users** — uses `{{baseUrl}}` environment variable
+
+    ---
+
+    ### 📌 Key Concepts
+
+    - **Environment variables** like `{{baseUrl}}` and `{{echoUrl}}` let you reuse URLs across requests — we'll explore these more in the next section
+    - **POST requests** send data in the body; **GET requests** retrieve data
+    - Bruno auto-formats JSON responses for easy reading
   type: text/markdown

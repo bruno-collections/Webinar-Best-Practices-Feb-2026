@@ -7,145 +7,75 @@ request: {}
 
 docs:
   content: |-
-    # 🏃 Section 5: Collection Runner
+    # 🏃 Section 6: Collection Runner
 
-    The Collection Runner lets you execute multiple requests in sequence — and with **data files**, you can run the same request multiple times with different data!
+    The Collection Runner lets you execute multiple requests in sequence — and with **data files**, you can run the same requests multiple times with different data!
 
     In this section, you will:
 
-    - ✅ Create requests that use data file variables
+    - ✅ Use data file variables in request URLs and bodies
     - ✅ Run a folder using the Collection Runner
-    - ✅ Use CSV data files for data-driven testing
-    - ✅ Learn about the Bruno CLI for automation
+    - ✅ Use a JSON data file for data-driven testing
+    - ✅ See how requests execute in sequence order
+
+    📌 Make sure the **Workshop** environment is selected from the dropdown (top right).
 
     ---
 
-    ### 👤 Step 1: Create "Create User"
-
-    1. Right-click on the `05-Collection Runner` folder → **New Request**
-    2. Name it `Create User`
-    3. Set the method to **POST**
-    4. Set the URL to: `{{echoUrl}}`
-    5. Go to **Body** → **JSON** and paste:
-
-    ```json
-    {
-      "name": "{{name}}",
-      "job": "{{job}}"
-    }
-    ```
-
-    6. Go to the **Assert** tab and add:
-
-    | Expr | Operator | Value |
-    |------|----------|-------|
-    | res.status | equals | 200 |
-    | res.body.name | isString | |
-    | res.body.job | isString | |
-
-    7. Go to the **Tests** tab and paste:
-
-    ```javascript
-    const body = res.getBody();
-
-    test("User data was echoed back", () => {
-      expect(body).to.have.property("name");
-      expect(body).to.have.property("job");
-    });
-
-    test("Name is not empty", () => {
-      expect(body.name.length).to.be.greaterThan(0);
-    });
-    ```
-
-    💡 `{{name}}` and `{{job}}` are placeholders — they'll be filled by the data file when you use the Collection Runner!
+    ### 📋 Requests in This Section
 
     ---
 
-    ### ✔️ Step 2: Create "Verify Creation"
-
-    1. Create a new request named `Verify Creation`
-    2. Set the method to **GET**
-    3. Set the URL to: `{{baseUrl}}/users/1`
-    4. Go to the **Assert** tab and add:
-
-    | Expr | Operator | Value |
-    |------|----------|-------|
-    | res.status | equals | 200 |
-    | res.body | isJson | |
-    | res.body.id | equals | 1 |
-
-    5. Go to the **Tests** tab and paste:
-
-    ```javascript
-    test("User exists and has valid data", () => {
-      const body = res.getBody();
-      expect(body).to.have.property("id");
-      expect(body).to.have.property("name");
-      expect(body).to.have.property("email");
-    });
-
-    test("Response time is acceptable", () => {
-      expect(res.responseTime).to.be.below(5000);
-    });
-    ```
+    **🔹 Create User** — POST user data to the echo server
+    - Sends a JSON body with `name` and `website` fields using data file variables
+    - 🎯 **Your task:** The body has empty `{{}}` placeholders — fill in the correct **data file variable names**
+    - 💡 **Hint:** Look at `users.json` in the collection root to see the available column names
+    - Assertions are already set up to verify the echoed response
 
     ---
 
-    ### 🏃 Step 3: Run the Collection Runner
-
-    **Without a data file:**
-    1. Right-click on the `05-Collection Runner` folder → **Run**
-    2. Watch both requests execute in sequence
-    3. Review the test results
-
-    **With a data file (the fun part!):**
-    1. Right-click on the `05-Collection Runner` folder → **Run**
-    2. In the runner dialog, select the data file: `data-files/new-users.csv`
-    3. Each row in the CSV becomes a separate run — `{{name}}` and `{{job}}` get replaced with row values
-    4. Watch 5 users get created, one per CSV row! 🎉
-
-    ### 📁 Data Files
-    Check the `data-files/` folder at the collection root:
-    - `new-users.csv` — CSV format (name, job columns)
-    - `new-users.json` — JSON format (same data, array of objects)
+    **🔹 Verify Creation** — GET a user by ID from JSONPlaceholder
+    - Fetches a user to demonstrate that requests run in **sequence order** (Create User first, then Verify Creation)
+    - 🎯 **Your task:** The URL has an empty `{{}}` — fill in the correct variable name to look up the user by ID
+    - 💡 **Hint:** Which column in `users.json` contains the user's ID?
+    - Also demonstrates `res.responseTime` assertions for performance checks
 
     ---
 
-    ### 💻 Bruno CLI
+    ### 🏃 Using the Collection Runner
 
-    Everything in the GUI can also run from the terminal — great for CI/CD!
+    Once you've filled in the placeholders:
 
-    ```bash
-    # Run this folder
-    bru run "05-Collection Runner" --env Workshop
-
-    # Run with CSV data file
-    bru run "05-Collection Runner" --env Workshop --csv-file-path data-files/new-users.csv
-
-    # Run with JSON data file
-    bru run "05-Collection Runner" --env Workshop --json-file-path data-files/new-users.json
-
-    # Generate reports
-    bru run "05-Collection Runner" --env Workshop --csv-file-path data-files/new-users.csv --reporter-html reports/report.html
-
-    # Run entire collection
-    bru run --env Workshop
-
-    # Stop on first failure
-    bru run --env Workshop --bail
-    ```
+    1. **Without a data file:** Right-click on the `06-Collection Runner` folder → **Run** — both requests execute in sequence
+    2. **With a data file:** In the runner dialog, check **Run with Parameters** → select **JSON** → choose `users.json` from the collection root
+    3. The runner will iterate **5 times** (once per user in the JSON file), replacing `{{name}}`, `{{website}}`, and `{{id}}` with each row's values 🎉
 
     ---
 
-    ### 📌 Summary
+    ### 📁 Data File
 
-    In this section, you learned how to:
+    📄 **users.json** — located at the collection root, contains 5 users from JSONPlaceholder:
+    - Columns: `id`, `name`, `website`
+    - Each object becomes one iteration of the collection run
+    - Variables are accessed as `{{id}}`, `{{name}}`, `{{website}}` in URLs and bodies
 
-    - ✅ Create requests with data file placeholders (`{{name}}`, `{{job}}`)
-    - ✅ Use the Collection Runner to execute requests in sequence
-    - ✅ Use CSV/JSON data files for data-driven testing
-    - ✅ Use the Bruno CLI for headless/CI execution
+    ---
 
-    📁 Check the **Solution** folder to see the completed requests.
+    ### 📂 Solution Folder
+
+    The **Solution** subfolder contains fully working versions with all placeholders filled in.
+
+    **Solution requests:**
+    - ✅ **Create User** — uses `{{name}}` and `{{website}}` from the data file
+    - ✅ **Verify Creation** — uses `{{id}}` to fetch the correct user
+
+    ---
+
+    ### 📌 Key Concepts
+
+    - **Collection Runner** — execute all requests in a folder in sequence order
+    - **Data-driven testing** — use JSON (or CSV) files to run the same requests with different data per iteration
+    - **Data file variables** — keys in the JSON objects become `{{variableName}}` placeholders
+    - **Sequence order** — requests run in their `seq` order (seq 1 first, seq 2 second, etc.)
+    - **Performance assertions** — use `res.responseTime` to assert on response speed
   type: text/markdown

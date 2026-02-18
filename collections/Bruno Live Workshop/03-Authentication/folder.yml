@@ -11,104 +11,61 @@ docs:
 
     You will:
 
-    - ✅ **Bearer Login** — log in with credentials, capture a token, access a protected resource
-    - ✅ **OAuth2 Client Credentials** — use Bruno's built-in OAuth2 auth to auto-fetch tokens
-    - ✅ Use **post-response scripts** to capture tokens automatically
-    - ✅ Compare manual token chaining vs. Bruno's native OAuth2 support
+    - ✅ Log in with credentials and capture a bearer token
+    - ✅ Use a captured token to access a protected resource
+    - ✅ Use Bruno's built-in **OAuth2** auth to auto-fetch tokens
+    - ✅ Compare manual token chaining vs. native OAuth2 support
+
+    📌 Make sure the **Workshop** environment is selected from the dropdown (top right).
 
     ---
 
-    ## 🔑 Flow 1: Bearer Token Login
-
-    This is the most common auth pattern — log in with a username/password, receive a token, then use it on subsequent requests.
-
-    ### Step 1: Create "Bearer Login"
-
-    1. Right-click on the `03-Authentication` folder → **New Request**
-    2. Name it `Bearer Login`
-    3. Set the method to **POST**
-    4. Set the URL to: `{{httpFakerUrl}}/api/auth/bearer/login`
-    5. Go to **Auth** tab → set to **No Auth** (we're sending credentials in the body)
-    6. Go to **Body** → select **Form URL Encoded** and add:
-       - `username`: `{{authUsername}}`
-       - `password`: `{{authPassword}}`
-    7. Click **Send** ▶️
-
-    You should get back: `{"token": "my_secret_token"}`
-
-    💡 Now let's **capture that token automatically!**
-
-    8. Go to the **Script** tab → **Post Response** and add:
-
-    ```javascript
-    const body = res.getBody();
-
-    if (body && body.token) {
-      bru.setVar("bearerToken", body.token);
-      console.log("🔑 Captured bearer token:", body.token);
-    }
-    ```
-
-    9. Click **Send** again — the token is now stored as `{{bearerToken}}`
+    ### 📋 Requests in This Section
 
     ---
 
-    ### Step 2: Create "Bearer Protected Resource"
+    ## 🔑 Flow 1: Bearer Token Auth
 
-    Now use the captured token to access a protected endpoint.
+    **🔹 Bearer Login** — POST to log in and capture a token
+    - Sends username/password credentials to get back a bearer token
+    - 🎯 **Your task:** The form fields are **disabled and empty** — enable them and fill in the correct environment variables for the credentials
+    - 🎯 **Your task:** The post-response script has incomplete `bru.setVar()` and `console.log()` calls — fill in the missing values to capture the token
+    - 💡 **Hint:** Check the Workshop environment for auth-related variables
 
-    1. Create a new request named `Bearer Protected Resource`
-    2. Set the method to **GET**
-    3. Set the URL to: `{{httpFakerUrl}}/api/auth/bearer/resource`
-    4. Go to **Auth** tab → select **Bearer Token**
-    5. Set the **Token** to: `{{bearerToken}}`
-    6. Click **Send** ▶️
+    ---
 
-    🎉 You should see a Bruno profile with name, email, age, and likes!
-
-    ⚠️ **Important:** You must run "Bearer Login" first to capture the token. If you get a 401, go back and run the login request.
+    **🔹 Bearer Protected Resource** — GET a protected endpoint using the token
+    - Uses the bearer token from the login request to access a protected resource
+    - 🎯 **Your task:** The bearer token field has an empty `{{}}` — fill in the variable name that was captured by the login script
+    - ⚠️ You must run **Bearer Login** first to capture the token!
 
     ---
 
     ## 🌐 Flow 2: OAuth2 Client Credentials
 
-    The Client Credentials grant is used for **server-to-server** communication — no user login needed, just client ID and secret. Bruno has a **built-in OAuth2 auth method** that handles token fetching automatically!
-
-    ### Step 3: Create "Get Token - OAuth2"
-
-    1. Create a new request named `Get Token - OAuth2`
-    2. Set the method to **GET**
-    3. Set the URL to: `{{httpFakerUrl}}/api/auth/oauth2/client-credentials/resource`
-    4. Go to **Auth** tab → select **OAuth2**
-    5. Configure the OAuth2 settings:
-       - **Grant Type:** `Client Credentials`
-       - **Access Token URL:** `https://www.httpfaker.org/api/auth/oauth2/client-credentials/token`
-       - **Client ID:** `demo-client-id`
-       - **Client Secret:** `demo-client-secret`
-       - **Scope:** `user:read`
-       - **Credentials Placement:** `Body`
-       - **Token Placement:** `Header`
-       - **Token Header Prefix:** `Bearer`
-       - **Auto Fetch Token:** ✅ enabled
-    6. Click **Send** ▶️
-
-    🎉 Bruno automatically fetches the access token and attaches it to the request — you should see: `{"resource": {"name": "bruno", "email": "hello@bruno.com"}}`
-
-    💡 **Compare the two flows:** In Flow 1, you manually captured the token with a script and chained two requests. Here, Bruno's OAuth2 auth handles everything in a single request — no scripting needed!
+    **🔹 Get Token - OAuth2** — Bruno's built-in OAuth2 auth
+    - Uses the Client Credentials grant for server-to-server communication
+    - 🎯 **Your task:** The OAuth2 configuration is missing the **Client ID** and **Client Secret** — add the correct credential variables
+    - 💡 **Hint:** Check the Workshop environment for OAuth-related variables
+    - 💡 **Compare:** Notice how OAuth2 handles token fetching automatically — no scripting needed!
 
     ---
 
-    ### 📌 Summary
+    ### 📁 Solution Folder
 
-    In this section, you learned:
+    The **Solution** subfolder contains fully working versions of all auth requests.
 
-    - ✅ **Bearer Login** — authenticate with credentials, capture a token with `bru.setVar()`
-    - ✅ **Bearer Auth** — use `Authorization: Bearer <token>` to access protected resources
-    - ✅ **Request chaining** — capture data from one response and use it in the next
-    - ✅ **OAuth2 Client Credentials** — use Bruno's built-in OAuth2 auth to auto-fetch and attach tokens
-    - ✅ **Manual vs. automatic** — scripted token capture vs. Bruno handling it natively
+    **Solution requests:**
+    - ✅ **Bearer Login** — credentials enabled, post-response script captures the token with `bru.setVar()`
+    - ✅ **Bearer Protected Resource** — uses `{{bearerToken}}` for authentication
+    - ✅ **Get Token - OAuth2** — complete OAuth2 config with auto-fetch enabled
 
-    🔒 **Pro tip:** In Bruno, you can mark variables as **secret** so credentials are never saved to disk or committed to Git!
+    ---
 
-    📁 Check the **Solution** folder to see the completed requests.
+    ### 📌 Key Concepts
+
+    - **`bru.setVar()`** — capture values from responses (like tokens) for use in subsequent requests
+    - **Bearer Auth** — manually chain login → capture token → use token
+    - **OAuth2 Client Credentials** — Bruno handles token fetching and attachment automatically
+    - 🔒 **Pro tip:** In Bruno, you can mark variables as **secret** so credentials are never saved to disk or committed to Git!
   type: text/markdown
