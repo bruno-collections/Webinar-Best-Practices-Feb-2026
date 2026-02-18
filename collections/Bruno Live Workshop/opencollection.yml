@@ -68,6 +68,15 @@ docs:
     bru run --env Workshop --bail
     ```
 
+    ## 🤖 GitHub Actions CI
+
+    This repo includes a GitHub Actions workflow (`.github/workflows/collection-runner-tests.yml`) that automatically runs the **06-Collection Runner** section using the Bruno CLI and the `users.json` data file.
+
+    - **Triggers** on push to `main`, pull requests, or manual dispatch
+    - Runs `bru run "06-Collection Runner/Solution" --env Workshop --json-file-path ../../users.json`
+    - Generates JSON and HTML reports, uploaded as artifacts
+    - Great example of integrating Bruno into a CI/CD pipeline — see [GitHub Actions docs](https://docs.usebruno.com/bru-cli/gitHubCLI)
+
     ## 🙏 Public APIs Used
 
     This workshop uses the following free, public APIs — thank you to their maintainers!
