@@ -38,6 +38,6 @@ jobs:
         with:
           name: bruno-test-results
           path: |
-            collections/Bruno Live Workshop/results.json
-            collections/Bruno Live Workshop/results.html
+            results.json
+            results.html
 
